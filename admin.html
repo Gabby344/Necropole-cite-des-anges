@@ -4,135 +4,712 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Nécropole Cité des Anges</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --primary: #2c3e50;
-            --success: #27ae60;
-            --accent: #af944d;
-            --bg: #eef2f7;
+            --primary-dark: #1a1a2e;
+            --primary-light: #2c3e50;
+            --accent-gold: #b68a3d;
+            --accent-gold-light: #d4af37;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+            --gray-light: #e9ecef;
+            --gray: #6c757d;
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
         }
 
-        body { 
-            font-family: 'Poppins', sans-serif; 
-            background: var(--bg); 
-            margin: 0; 
-            padding: 20px; 
-            color: var(--primary);
-        }
-
-        .admin-panel { 
-            background: white; 
-            padding: 30px; 
-            border-radius: 15px; 
-            max-width: 600px; 
-            margin: auto; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
-        }
-
-        header { text-align: center; margin-bottom: 30px; border-bottom: 2px solid var(--accent); padding-bottom: 10px; }
-        
-        h2 { font-family: 'Playfair Display', serif; margin: 0; color: var(--primary); }
-        h3 { margin-top: 40px; border-top: 1px solid #eee; padding-top: 20px; color: var(--accent); }
-
-        label { display: block; margin-top: 15px; font-weight: 600; font-size: 0.9rem; }
-        
-        input, textarea { 
-            width: 100%; 
-            padding: 12px; 
-            margin-top: 5px; 
-            border-radius: 8px; 
-            border: 1px solid #ccc; 
+        * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
-            font-family: inherit;
         }
 
-        .btn-admin { 
-            background: var(--success); 
-            color: white; 
-            border: none; 
-            padding: 15px; 
-            width: 100%; 
-            border-radius: 8px; 
-            margin-top: 20px; 
-            font-size: 1rem; 
-            font-weight: bold;
-            cursor: pointer; 
-            transition: 0.3s;
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: var(--primary-dark);
+            min-height: 100vh;
+            padding: 20px;
         }
 
-        .btn-admin:hover { opacity: 0.9; transform: translateY(-2px); }
+        .admin-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-        .btn-print { background: var(--primary); }
+        .admin-header {
+            background: linear-gradient(to right, var(--primary-dark), var(--primary-light));
+            color: var(--white);
+            padding: 25px 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 5px solid var(--accent-gold);
+        }
 
-        #linkOutput {
-            margin-top: 20px;
+        .admin-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .admin-header-subtitle {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+
+        .admin-stats {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            flex: 1;
+            background: var(--white);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+            border-top: 4px solid var(--accent-gold);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-card h3 {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-card .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .admin-tabs {
+            display: flex;
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 18px;
+            background: none;
+            border: none;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--gray);
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .tab-btn:hover {
+            background: var(--light-bg);
+        }
+
+        .tab-btn.active {
+            color: var(--accent-gold);
+            background: var(--white);
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--accent-gold);
+        }
+
+        .tab-content {
             display: none;
-            background: #d4edda;
+            background: var(--white);
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--primary-dark);
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--gray-light);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--primary-light);
+            font-size: 0.95rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid var(--gray-light);
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition);
+            background: var(--light-bg);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 0 3px rgba(182, 138, 61, 0.1);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(to right, var(--accent-gold), var(--accent-gold-light));
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(182, 138, 61, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--primary-light);
+            color: var(--white);
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: var(--white);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: var(--white);
+        }
+
+        .link-output {
+            background: #e8f5e9;
+            border: 1px solid #c3e6cb;
             color: #155724;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 25px;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .link-output strong {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        #finalLink {
+            background: var(--white);
+            padding: 12px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            word-break: break-all;
+            margin-top: 10px;
+            border: 1px dashed #28a745;
+        }
+
+        .memorials-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+
+        .memorial-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--gray-light);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .memorial-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-gold);
+        }
+
+        .memorial-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, var(--accent-gold), var(--accent-gold-light));
+        }
+
+        .memorial-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+        }
+
+        .memorial-date {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .memorial-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .memorial-actions .btn {
+            flex: 1;
+            padding: 10px;
+            font-size: 0.9rem;
+        }
+
+        .messages-container {
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .message-item {
+            background: var(--light-bg);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--accent-gold);
+            position: relative;
+        }
+
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .message-author {
+            font-weight: 600;
+            color: var(--primary-dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .message-date {
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+
+        .message-content {
+            color: var(--primary-light);
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .message-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        .message-actions .btn {
+            padding: 8px 15px;
+            font-size: 0.85rem;
+        }
+
+        .alert {
             padding: 15px;
             border-radius: 8px;
-            word-break: break-all;
+            margin-bottom: 25px;
+            display: none;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
             border: 1px solid #c3e6cb;
         }
 
-        /* Style spécifique pour le PDF final */
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
         #printArea {
             display: none;
             padding: 50px;
-            background: white;
+            background: var(--white);
+            max-width: 800px;
+            margin: 0 auto;
         }
-        .pdf-header { text-align: center; border-bottom: 2px solid #af944d; padding-bottom: 20px; margin-bottom: 30px; }
-        .pdf-msg { margin-bottom: 15px; padding: 10px; border-bottom: 1px solid #eee; }
+
+        .pdf-header {
+            text-align: center;
+            border-bottom: 2px solid var(--accent-gold);
+            padding-bottom: 30px;
+            margin-bottom: 40px;
+        }
+
+        .pdf-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+        }
+
+        .pdf-message {
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .pdf-message-author {
+            font-weight: 600;
+            color: var(--accent-gold);
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .pdf-message-date {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+        }
+
+        .pdf-message-content {
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary-dark);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .admin-stats {
+                flex-direction: column;
+            }
+            
+            .memorials-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .admin-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            .admin-tabs {
+                flex-direction: column;
+            }
+        }
     </style>
 </head>
 <body>
-
-    <div class="admin-panel">
-        <header>
-            <h2>Gestion Cité des Anges</h2>
-            <p style="font-size: 0.8rem; color: #666;">Interface Administrateur - Kolwezi</p>
+    <div class="admin-container">
+        <!-- En-tête -->
+        <header class="admin-header">
+            <div>
+                <h1><i class="fas fa-angel"></i> Administration Nécropole</h1>
+                <p class="admin-header-subtitle">Cité des Anges - Kolwezi • Interface de gestion des livres d'or</p>
+            </div>
+            <div class="admin-stats">
+                <div class="stat-card">
+                    <h3>Espaces Actifs</h3>
+                    <div class="stat-number" id="activeMemorials">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Messages Aujourd'hui</h3>
+                    <div class="stat-number" id="todayMessages">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>PDF Générés</h3>
+                    <div class="stat-number" id="pdfGenerated">0</div>
+                </div>
+            </div>
         </header>
 
-        <section>
-            <label>Nom complet du défunt</label>
-            <input type="text" id="nom" placeholder="Ex: Jean Mukendi">
-            
-            <label>Biographie & Dates</label>
-            <textarea id="bio" rows="4" placeholder="Né le... décédé le..."></textarea>
-            
-            <label>Lien Photo du défunt (URL)</label>
-            <input type="text" id="photoUrl" placeholder="https://lien-vers-image.jpg">
-            
-            <button class="btn-admin" id="createBtn">CRÉER LE LIVRE NUMÉRIQUE</button>
-            
-            <div id="linkOutput">
-                <strong>Livre créé !</strong><br>
-                Lien WhatsApp : <br><span id="finalLink" style="font-size: 0.85rem;"></span>
-            </div>
-        </section>
-
-        <section>
-            <h3>Impression de Livre</h3>
-            <p style="font-size: 0.8rem; color: #777;">Saisissez le nom exact pour générer le PDF de souvenirs.</p>
-            <input type="text" id="printSearch" placeholder="Nom du défunt...">
-            <button class="btn-admin btn-print" id="btnPreparePrint">GÉNÉRER PDF POUR IMPRESSION</button>
-        </section>
-    </div>
-
-    <div id="printArea">
-        <div class="pdf-header">
-            <h1 id="pNom" style="font-family: 'Playfair Display', serif;"></h1>
-            <p>Livre d'Or Numérique - Nécropole Cité des Anges de Kolwezi</p>
+        <!-- Navigation par onglets -->
+        <div class="admin-tabs">
+            <button class="tab-btn active" data-tab="create"><i class="fas fa-plus-circle"></i> Créer un Livre</button>
+            <button class="tab-btn" data-tab="manage"><i class="fas fa-book"></i> Gérer les Livres</button>
+            <button class="tab-btn" data-tab="messages"><i class="fas fa-comments"></i> Messages</button>
+            <button class="tab-btn" data-tab="print"><i class="fas fa-print"></i> Impression</button>
         </div>
-        <div id="pMessages"></div>
+
+        <!-- Onglet: Création -->
+        <div id="createTab" class="tab-content active">
+            <h2 class="section-title"><i class="fas fa-plus-circle"></i> Créer un Nouveau Livre d'Or</h2>
+            <div class="alert" id="createAlert"></div>
+            
+            <div class="form-group">
+                <label class="form-label">Nom complet du défunt</label>
+                <input type="text" id="nom" class="form-control" placeholder="Ex: Jean Mukendi Kazadi">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Biographie & Dates</label>
+                <textarea id="bio" class="form-control" placeholder="Né le 15 mars 1950 à Kolwezi... Décédé le 10 janvier 2026... Biographie détaillée..."></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Lien de la photo du défunt</label>
+                <input type="text" id="photoUrl" class="form-control" placeholder="https://exemple.com/photo.jpg">
+                <small style="color: var(--gray); margin-top: 5px; display: block;">Laisser vide pour utiliser une image par défaut</small>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Dates commémoratives</label>
+                <div style="display: flex; gap: 15px;">
+                    <input type="date" id="dateNaissance" class="form-control" style="flex: 1;">
+                    <input type="date" id="dateDeces" class="form-control" style="flex: 1;">
+                </div>
+            </div>
+            
+            <button class="btn btn-primary" id="createBtn" style="width: 100%;">
+                <i class="fas fa-book-medical"></i> CRÉER LE LIVRE D'OR NUMÉRIQUE
+            </button>
+            
+            <div class="link-output" id="linkOutput">
+                <strong><i class="fas fa-check-circle"></i> Livre créé avec succès !</strong>
+                <p style="margin: 10px 0;">Partagez ce lien avec la famille et les proches :</p>
+                <div id="finalLink"></div>
+                <div style="margin-top: 20px; display: flex; gap: 10px;">
+                    <button class="btn btn-secondary" onclick="copyLink()">
+                        <i class="fas fa-copy"></i> Copier le lien
+                    </button>
+                    <button class="btn btn-success" onclick="shareWhatsApp()">
+                        <i class="fab fa-whatsapp"></i> Partager WhatsApp
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Onglet: Gestion -->
+        <div id="manageTab" class="tab-content">
+            <h2 class="section-title"><i class="fas fa-book"></i> Gestion des Livres d'Or</h2>
+            <div id="memorialsList" class="memorials-list">
+                <!-- Les livres seront chargés ici -->
+            </div>
+        </div>
+
+        <!-- Onglet: Messages -->
+        <div id="messagesTab" class="tab-content">
+            <h2 class="section-title"><i class="fas fa-comments"></i> Gestion des Messages</h2>
+            <div class="form-group">
+                <select id="memorialSelect" class="form-control">
+                    <option value="">Sélectionner un livre d'or...</option>
+                </select>
+            </div>
+            <div id="messagesContainer" class="messages-container">
+                <!-- Les messages seront chargés ici -->
+            </div>
+        </div>
+
+        <!-- Onglet: Impression -->
+        <div id="printTab" class="tab-content">
+            <h2 class="section-title"><i class="fas fa-print"></i> Impression des Livres</h2>
+            
+            <div class="form-group">
+                <label class="form-label">Sélectionner un livre à imprimer</label>
+                <select id="printSelect" class="form-control">
+                    <option value="">Choisir un livre d'or...</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Options d'impression</label>
+                <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                    <label style="display: flex; align-items: center; gap: 8px;">
+                        <input type="checkbox" id="optDate" checked> Inclure les dates
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 8px;">
+                        <input type="checkbox" id="optPhoto" checked> Inclure la photo
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 8px;">
+                        <input type="checkbox" id="optBorder" checked> Bordures décoratives
+                    </label>
+                </div>
+            </div>
+            
+            <button class="btn btn-primary" id="btnPreparePrint" style="width: 100%;">
+                <i class="fas fa-file-pdf"></i> GÉNÉRER LE PDF POUR IMPRESSION
+            </button>
+            
+            <div style="margin-top: 30px; padding: 20px; background: var(--light-bg); border-radius: 10px;">
+                <h3 style="color: var(--primary-dark); margin-bottom: 10px;"><i class="fas fa-info-circle"></i> Information</h3>
+                <p style="color: var(--gray);">Le PDF sera généré avec une mise en page élégante adaptée à l'impression. Vous pourrez ensuite l'envoyer à l'imprimeur partenaire à Kolwezi.</p>
+            </div>
+        </div>
+
+        <!-- Zone d'impression cachée -->
+        <div id="printArea">
+            <div class="pdf-header">
+                <h1 id="pNom">Livre d'Or Mémorial</h1>
+                <p style="color: var(--gray); font-size: 1.1rem;">Nécropole Cité des Anges de Kolwezi</p>
+                <p style="color: var(--accent-gold); margin-top: 10px; font-style: italic;">"En mémoire éternelle"</p>
+            </div>
+            <div id="pBio" style="text-align: center; margin-bottom: 40px; padding-bottom: 30px; border-bottom: 1px solid var(--gray-light);"></div>
+            <div id="pMessages"></div>
+            <div style="margin-top: 50px; text-align: center; color: var(--gray); font-size: 0.9rem; padding-top: 30px; border-top: 1px solid var(--gray-light);">
+                Document généré le <span id="printDate"></span> • Nécropole Cité des Anges, Kolwezi
+            </div>
+        </div>
+
+        <!-- Modals -->
+        <div id="deleteModal" class="modal">
+            <div class="modal-content">
+                <h3 class="modal-title"><i class="fas fa-exclamation-triangle"></i> Confirmer la suppression</h3>
+                <p id="deleteMessage">Êtes-vous sûr de vouloir supprimer ce message ? Cette action est irréversible.</p>
+                <div class="modal-actions">
+                    <button class="btn btn-secondary" onclick="closeModal('deleteModal')">Annuler</button>
+                    <button class="btn btn-danger" id="confirmDelete">Supprimer</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="editModal" class="modal">
+            <div class="modal-content">
+                <h3 class="modal-title"><i class="fas fa-edit"></i> Modifier le message</h3>
+                <div class="form-group">
+                    <label class="form-label">Auteur</label>
+                    <input type="text" id="editAuthor" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Message</label>
+                    <textarea id="editContent" class="form-control" rows="5"></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button class="btn btn-secondary" onclick="closeModal('editModal')">Annuler</button>
+                    <button class="btn btn-primary" id="confirmEdit">Enregistrer</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, doc, setDoc, getDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { 
+            getFirestore, 
+            doc, 
+            setDoc, 
+            getDoc, 
+            collection, 
+            getDocs, 
+            query, 
+            orderBy, 
+            deleteDoc,
+            updateDoc,
+            Timestamp,
+            onSnapshot
+        } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyBenDfciup5UUHxVpVEkDOC9Id3H1fvjeY",
@@ -146,73 +723,544 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // --- ACTION : CRÉER UN LIVRE ---
+        // Variables globales
+        let currentMemorialId = null;
+        let currentMessageId = null;
+        let currentMessageData = null;
+        let memorials = [];
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', () => {
+            initTabs();
+            loadMemorials();
+            setupEventListeners();
+            startRealTimeUpdates();
+        });
+
+        // Gestion des onglets
+        function initTabs() {
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const tabId = btn.getAttribute('data-tab');
+                    
+                    // Mettre à jour les boutons
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    
+                    // Afficher le contenu correspondant
+                    document.querySelectorAll('.tab-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    document.getElementById(tabId + 'Tab').classList.add('active');
+                });
+            });
+        }
+
+        // Charger tous les livres
+        async function loadMemorials() {
+            try {
+                const querySnapshot = await getDocs(collection(db, "deuils"));
+                memorials = [];
+                const memorialsList = document.getElementById('memorialsList');
+                const memorialSelect = document.getElementById('memorialSelect');
+                const printSelect = document.getElementById('printSelect');
+                
+                memorialsList.innerHTML = '';
+                memorialSelect.innerHTML = '<option value="">Sélectionner un livre d\'or...</option>';
+                printSelect.innerHTML = '<option value="">Choisir un livre d\'or...</option>';
+                
+                let activeCount = 0;
+                
+                querySnapshot.forEach((docSnapshot) => {
+                    const data = docSnapshot.data();
+                    memorials.push({ id: docSnapshot.id, ...data });
+                    
+                    // Compter les actifs (créés dans les 30 derniers jours)
+                    const creationDate = data.dateCreation?.toDate() || new Date();
+                    const daysSinceCreation = Math.floor((new Date() - creationDate) / (1000 * 60 * 60 * 24));
+                    if (daysSinceCreation <= 30) activeCount++;
+                    
+                    // Ajouter à la liste des livres
+                    const memorialElement = createMemorialCard(docSnapshot.id, data);
+                    memorialsList.appendChild(memorialElement);
+                    
+                    // Ajouter aux sélecteurs
+                    const option = document.createElement('option');
+                    option.value = docSnapshot.id;
+                    option.textContent = data.nom;
+                    
+                    memorialSelect.appendChild(option.cloneNode(true));
+                    printSelect.appendChild(option);
+                });
+                
+                document.getElementById('activeMemorials').textContent = activeCount;
+                document.getElementById('todayMessages').textContent = '0'; // À implémenter avec les statistiques réelles
+                
+                if (querySnapshot.size === 0) {
+                    memorialsList.innerHTML = `
+                        <div style="grid-column: 1 / -1; text-align: center; padding: 50px; color: var(--gray);">
+                            <i class="fas fa-book" style="font-size: 3rem; margin-bottom: 20px; opacity: 0.3;"></i>
+                            <h3>Aucun livre d'or créé</h3>
+                            <p>Commencez par créer votre premier livre d'or numérique.</p>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error("Erreur chargement des livres:", error);
+                showAlert('createAlert', 'Erreur lors du chargement des livres.', 'error');
+            }
+        }
+
+        // Créer une carte de livre
+        function createMemorialCard(id, data) {
+            const card = document.createElement('div');
+            card.className = 'memorial-card';
+            card.dataset.id = id;
+            
+            const dateStr = data.dateCreation ? 
+                new Date(data.dateCreation.toDate()).toLocaleDateString('fr-FR') : 
+                'Date inconnue';
+                
+            card.innerHTML = `
+                <div class="memorial-name">${data.nom}</div>
+                <div class="memorial-date">
+                    <i class="far fa-calendar"></i> Créé le ${dateStr}
+                </div>
+                <p style="color: var(--gray); font-size: 0.95rem; line-height: 1.5;">
+                    ${data.biographie ? (data.biographie.substring(0, 100) + '...') : 'Aucune biographie'}
+                </p>
+                <div class="memorial-actions">
+                    <button class="btn btn-secondary" onclick="viewMessages('${id}')">
+                        <i class="fas fa-eye"></i> Voir
+                    </button>
+                    <button class="btn btn-primary" onclick="shareMemorial('${id}')">
+                        <i class="fas fa-share"></i> Partager
+                    </button>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        // Créer un nouveau livre
         document.getElementById('createBtn').onclick = async () => {
             const nom = document.getElementById('nom').value.trim();
             const bio = document.getElementById('bio').value;
             const photoUrl = document.getElementById('photoUrl').value;
-
-            if(nom && bio) {
-                try {
-                    await setDoc(doc(db, "deuils", nom), {
-                        nom, biographie: bio, photoUrl, dateCreation: new Date()
-                    });
-
-                    const link = window.location.href.replace('admin.html', 'livres.html') + "?name=" + encodeURIComponent(nom);
-                    document.getElementById('finalLink').innerText = link;
-                    document.getElementById('linkOutput').style.display = "block";
-                    alert("Livre d'or activé avec succès !");
-                } catch (e) {
-                    alert("Erreur Firebase : " + e.message);
-                }
-            } else {
-                alert("Veuillez remplir au moins le nom et la biographie.");
+            const dateNaissance = document.getElementById('dateNaissance').value;
+            const dateDeces = document.getElementById('dateDeces').value;
+            
+            if(!nom || !bio) {
+                showAlert('createAlert', 'Veuillez remplir au moins le nom et la biographie.', 'error');
+                return;
+            }
+            
+            try {
+                // Utiliser un ID unique basé sur le nom et la date
+                const memorialId = nom.replace(/\s+/g, '_') + '_' + Date.now();
+                
+                const memorialData = {
+                    nom,
+                    biographie: bio,
+                    photoUrl: photoUrl || 'https://via.placeholder.com/400x400/2c3e50/ffffff?text=Mémoire+Éternelle',
+                    dateNaissance: dateNaissance || null,
+                    dateDeces: dateDeces || null,
+                    dateCreation: Timestamp.now(),
+                    status: 'active',
+                    messageCount: 0
+                };
+                
+                await setDoc(doc(db, "deuils", memorialId), memorialData);
+                
+                // Générer le lien
+                const link = `${window.location.origin}/livres.html?id=${memorialId}`;
+                document.getElementById('finalLink').textContent = link;
+                document.getElementById('linkOutput').style.display = 'block';
+                
+                showAlert('createAlert', 'Livre d\'or créé avec succès !', 'success');
+                
+                // Réinitialiser le formulaire
+                document.getElementById('nom').value = '';
+                document.getElementById('bio').value = '';
+                document.getElementById('photoUrl').value = '';
+                document.getElementById('dateNaissance').value = '';
+                document.getElementById('dateDeces').value = '';
+                
+                // Recharger la liste
+                loadMemorials();
+                
+            } catch (error) {
+                console.error("Erreur création:", error);
+                showAlert('createAlert', 'Erreur lors de la création: ' + error.message, 'error');
             }
         };
 
-        // --- ACTION : GÉNÉRER PDF ---
-        document.getElementById('btnPreparePrint').onclick = async () => {
-            const nomSearch = document.getElementById('printSearch').value.trim();
-            if(!nomSearch) return alert("Entrez un nom.");
+        // Voir les messages d'un livre
+        window.viewMessages = function(memorialId) {
+            currentMemorialId = memorialId;
+            
+            // Activer l'onglet messages
+            document.querySelector('[data-tab="messages"]').click();
+            
+            // Sélectionner le livre dans la liste déroulante
+            document.getElementById('memorialSelect').value = memorialId;
+            
+            // Charger les messages
+            loadMessages(memorialId);
+        };
 
-            const docRef = doc(db, "deuils", nomSearch);
-            const docSnap = await getDoc(docRef);
-
-            if (docSnap.exists()) {
-                const data = docSnap.data();
-                document.getElementById('pNom').innerText = "Hommage à " + data.nom;
+        // Charger les messages d'un livre
+        async function loadMessages(memorialId) {
+            const messagesContainer = document.getElementById('messagesContainer');
+            
+            if (!memorialId) {
+                messagesContainer.innerHTML = `
+                    <div style="text-align: center; padding: 50px; color: var(--gray);">
+                        <i class="fas fa-comments" style="font-size: 3rem; margin-bottom: 20px; opacity: 0.3;"></i>
+                        <h3>Sélectionnez un livre d'or</h3>
+                        <p>Choisissez un livre dans la liste pour voir ses messages.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            try {
+                const messagesRef = collection(db, "deuils", memorialId, "messages");
+                const q = query(messagesRef, orderBy("date", "desc"));
+                const querySnapshot = await getDocs(q);
                 
-                // Récupérer les messages
-                const msgSnap = await getDocs(collection(db, "deuils", nomSearch, "messages"));
-                let htmlContent = "";
-                msgSnap.forEach(m => {
-                    const d = m.data();
-                    htmlContent += `
-                        <div class="pdf-msg">
-                            <strong style="color:#af944d">${d.auteur}</strong><br>
-                            <p style="margin:5px 0;">${d.texte}</p>
-                        </div>`;
+                messagesContainer.innerHTML = '';
+                
+                if (querySnapshot.empty) {
+                    messagesContainer.innerHTML = `
+                        <div style="text-align: center; padding: 50px; color: var(--gray);">
+                            <i class="far fa-comment-dots" style="font-size: 3rem; margin-bottom: 20px; opacity: 0.3;"></i>
+                            <h3>Aucun message</h3>
+                            <p>Aucun message n'a encore été laissé dans ce livre d'or.</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                querySnapshot.forEach((docSnapshot) => {
+                    const message = docSnapshot.data();
+                    const messageElement = createMessageElement(docSnapshot.id, message);
+                    messagesContainer.appendChild(messageElement);
                 });
+                
+            } catch (error) {
+                console.error("Erreur chargement messages:", error);
+                messagesContainer.innerHTML = `
+                    <div class="alert-error" style="padding: 20px; border-radius: 8px;">
+                        Erreur lors du chargement des messages: ${error.message}
+                    </div>
+                `;
+            }
+        }
 
-                document.getElementById('pMessages').innerHTML = htmlContent || "<p>Aucun message dans ce livre.</p>";
+        // Créer un élément de message
+        function createMessageElement(messageId, message) {
+            const div = document.createElement('div');
+            div.className = 'message-item';
+            div.dataset.id = messageId;
+            
+            const date = message.date ? 
+                new Date(message.date.toDate()).toLocaleString('fr-FR') : 
+                'Date inconnue';
+                
+            div.innerHTML = `
+                <div class="message-header">
+                    <div class="message-author">
+                        <i class="fas fa-user"></i> ${message.auteur || 'Anonyme'}
+                    </div>
+                    <div class="message-date">${date}</div>
+                </div>
+                <div class="message-content">${message.texte}</div>
+                <div class="message-actions">
+                    <button class="btn btn-secondary" onclick="editMessage('${messageId}', this)">
+                        <i class="fas fa-edit"></i> Modifier
+                    </button>
+                    <button class="btn btn-danger" onclick="deleteMessagePrompt('${messageId}', this)">
+                        <i class="fas fa-trash"></i> Supprimer
+                    </button>
+                </div>
+            `;
+            
+            return div;
+        }
 
-                // Lancement du PDF
+        // Prompt de suppression
+        window.deleteMessagePrompt = function(messageId, button) {
+            currentMessageId = messageId;
+            const messageDiv = button.closest('.message-item');
+            const author = messageDiv.querySelector('.message-author').textContent.trim();
+            
+            document.getElementById('deleteMessage').textContent = 
+                `Êtes-vous sûr de vouloir supprimer le message de "${author}" ? Cette action est irréversible.`;
+            
+            document.getElementById('deleteModal').style.display = 'flex';
+        };
+
+        // Supprimer un message
+        document.getElementById('confirmDelete').onclick = async () => {
+            if (!currentMessageId || !currentMemorialId) return;
+            
+            try {
+                await deleteDoc(doc(db, "deuils", currentMemorialId, "messages", currentMessageId));
+                
+                // Mettre à jour le compteur
+                const memorialRef = doc(db, "deuils", currentMemorialId);
+                const memorialDoc = await getDoc(memorialRef);
+                if (memorialDoc.exists()) {
+                    const currentCount = memorialDoc.data().messageCount || 0;
+                    await updateDoc(memorialRef, {
+                        messageCount: Math.max(0, currentCount - 1)
+                    });
+                }
+                
+                closeModal('deleteModal');
+                loadMessages(currentMemorialId);
+                showAlert('createAlert', 'Message supprimé avec succès.', 'success');
+                
+            } catch (error) {
+                console.error("Erreur suppression:", error);
+                showAlert('createAlert', 'Erreur lors de la suppression.', 'error');
+            }
+        };
+
+        // Éditer un message
+        window.editMessage = function(messageId, button) {
+            currentMessageId = messageId;
+            const messageDiv = button.closest('.message-item');
+            
+            currentMessageData = {
+                auteur: messageDiv.querySelector('.message-author').textContent.replace('', '').trim(),
+                texte: messageDiv.querySelector('.message-content').textContent.trim()
+            };
+            
+            document.getElementById('editAuthor').value = currentMessageData.auteur;
+            document.getElementById('editContent').value = currentMessageData.texte;
+            
+            document.getElementById('editModal').style.display = 'flex';
+        };
+
+        // Enregistrer les modifications
+        document.getElementById('confirmEdit').onclick = async () => {
+            if (!currentMessageId || !currentMemorialId) return;
+            
+            const newAuthor = document.getElementById('editAuthor').value.trim();
+            const newContent = document.getElementById('editContent').value.trim();
+            
+            if (!newAuthor || !newContent) {
+                alert('Veuillez remplir tous les champs.');
+                return;
+            }
+            
+            try {
+                await updateDoc(doc(db, "deuils", currentMemorialId, "messages", currentMessageId), {
+                    auteur: newAuthor,
+                    texte: newContent,
+                    edited: Timestamp.now()
+                });
+                
+                closeModal('editModal');
+                loadMessages(currentMemorialId);
+                showAlert('createAlert', 'Message modifié avec succès.', 'success');
+                
+            } catch (error) {
+                console.error("Erreur modification:", error);
+                showAlert('createAlert', 'Erreur lors de la modification.', 'error');
+            }
+        };
+
+        // Fermer un modal
+        window.closeModal = function(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        };
+
+        // Partager un livre
+        window.shareMemorial = function(memorialId) {
+            const memorial = memorials.find(m => m.id === memorialId);
+            if (!memorial) return;
+            
+            const link = `${window.location.origin}/livres.html?id=${memorialId}`;
+            const message = `Livre d'Or numérique en mémoire de ${memorial.nom}\n\n${link}`;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: `Livre d'Or - ${memorial.nom}`,
+                    text: `Partagez votre souvenir pour ${memorial.nom}`,
+                    url: link
+                });
+            } else {
+                navigator.clipboard.writeText(link).then(() => {
+                    showAlert('createAlert', 'Lien copié dans le presse-papier !', 'success');
+                });
+            }
+        };
+
+        // Copier le lien
+        window.copyLink = function() {
+            const link = document.getElementById('finalLink').textContent;
+            navigator.clipboard.writeText(link).then(() => {
+                showAlert('createAlert', 'Lien copié dans le presse-papier !', 'success');
+            });
+        };
+
+        // Partager sur WhatsApp
+        window.shareWhatsApp = function() {
+            const link = document.getElementById('finalLink').textContent;
+            const message = `Livre d'Or numérique - Partagez votre souvenir\n\n${link}`;
+            const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        };
+
+        // Gestionnaire d'événements
+        function setupEventListeners() {
+            // Sélecteur de livre pour les messages
+            document.getElementById('memorialSelect').addEventListener('change', (e) => {
+                currentMemorialId = e.target.value;
+                loadMessages(currentMemorialId);
+            });
+            
+            // Bouton de génération PDF
+            document.getElementById('btnPreparePrint').addEventListener('click', generatePDF);
+        }
+
+        // Générer PDF
+        async function generatePDF() {
+            const memorialId = document.getElementById('printSelect').value;
+            if (!memorialId) {
+                alert('Veuillez sélectionner un livre d\'or.');
+                return;
+            }
+            
+            try {
+                // Charger les données du livre
+                const memorialDoc = await getDoc(doc(db, "deuils", memorialId));
+                if (!memorialDoc.exists()) {
+                    alert('Livre introuvable.');
+                    return;
+                }
+                
+                const memorialData = memorialDoc.data();
+                
+                // Charger les messages
+                const messagesRef = collection(db, "deuils", memorialId, "messages");
+                const q = query(messagesRef, orderBy("date", "asc")); // Par ordre chronologique pour le PDF
+                const messagesSnapshot = await getDocs(q);
+                
+                // Préparer le contenu PDF
+                document.getElementById('pNom').textContent = `Livre d'Or - ${memorialData.nom}`;
+                
+                let bioHTML = `<p style="font-size: 1.1rem; line-height: 1.8;">${memorialData.biographie}</p>`;
+                if (memorialData.dateNaissance || memorialData.dateDeces) {
+                    bioHTML += `<p style="color: var(--gray); margin-top: 10px;">`;
+                    if (memorialData.dateNaissance) {
+                        bioHTML += `Né${memorialData.dateNaissance.includes('1950') ? 'e' : ''} le ${memorialData.dateNaissance}`;
+                    }
+                    if (memorialData.dateDeces) {
+                        bioHTML += `${memorialData.dateNaissance ? ' • ' : ''}Décédé${memorialData.dateDeces.includes('2026') ? 'e' : ''} le ${memorialData.dateDeces}`;
+                    }
+                    bioHTML += `</p>`;
+                }
+                document.getElementById('pBio').innerHTML = bioHTML;
+                
+                // Ajouter les messages
+                let messagesHTML = '';
+                messagesSnapshot.forEach((docSnapshot) => {
+                    const msg = docSnapshot.data();
+                    const date = msg.date ? 
+                        new Date(msg.date.toDate()).toLocaleDateString('fr-FR', {
+                            day: 'numeric', month: 'long', year: 'numeric'
+                        }) : '';
+                        
+                    messagesHTML += `
+                        <div class="pdf-message">
+                            <div class="pdf-message-author">${msg.auteur || 'Anonyme'}</div>
+                            <div class="pdf-message-date">${date}</div>
+                            <div class="pdf-message-content">${msg.texte}</div>
+                        </div>
+                    `;
+                });
+                
+                document.getElementById('pMessages').innerHTML = messagesHTML || 
+                    '<p style="text-align: center; color: var(--gray); font-style: italic;">Aucun message dans ce livre.</p>';
+                
+                document.getElementById('printDate').textContent = new Date().toLocaleDateString('fr-FR', {
+                    day: 'numeric', month: 'long', year: 'numeric'
+                });
+                
+                // Générer le PDF
                 const element = document.getElementById('printArea');
-                element.style.display = "block";
+                element.style.display = 'block';
                 
                 const opt = {
                     margin: 1,
-                    filename: `Livre_Or_${nomSearch}.pdf`,
+                    filename: `Livre_dOr_${memorialData.nom.replace(/\s+/g, '_')}.pdf`,
                     image: { type: 'jpeg', quality: 0.98 },
-                    html2canvas: { scale: 2 },
-                    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+                    html2canvas: { 
+                        scale: 2,
+                        useCORS: true,
+                        logging: false
+                    },
+                    jsPDF: { 
+                        unit: 'in', 
+                        format: 'a4', 
+                        orientation: 'portrait',
+                        compress: true
+                    }
                 };
+                
+                await html2pdf().set(opt).from(element).save();
+                
+                // Mettre à jour le compteur
+                document.getElementById('pdfGenerated').textContent = 
+                    parseInt(document.getElementById('pdfGenerated').textContent) + 1;
+                
+                element.style.display = 'none';
+                
+                showAlert('createAlert', 'PDF généré et téléchargé avec succès !', 'success');
+                
+            } catch (error) {
+                console.error("Erreur génération PDF:", error);
+                showAlert('createAlert', 'Erreur lors de la génération du PDF.', 'error');
+            }
+        }
 
-                html2pdf().set(opt).from(element).save().then(() => {
-                    element.style.display = "none";
-                });
-            } else {
-                alert("Ce livre n'existe pas dans la base de données.");
+        // Mise à jour en temps réel
+        function startRealTimeUpdates() {
+            // Surveiller les nouveaux livres
+            const memorialsRef = collection(db, "deuils");
+            onSnapshot(memorialsRef, () => {
+                loadMemorials();
+            });
+            
+            // Surveiller les nouveaux messages pour les stats
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            
+            // Cette fonctionnalité nécessiterait une structure de base de données plus avancée
+            // pour des statistiques en temps réel
+        }
+
+        // Afficher une alerte
+        function showAlert(elementId, message, type) {
+            const alertElement = document.getElementById(elementId);
+            alertElement.textContent = message;
+            alertElement.className = `alert alert-${type}`;
+            alertElement.style.display = 'block';
+            
+            setTimeout(() => {
+                alertElement.style.display = 'none';
+            }, 5000);
+        }
+
+        // Gestion des clics en dehors des modals
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
             }
         };
     </script>
