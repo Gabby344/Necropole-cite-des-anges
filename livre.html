@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livre d'Or Numérique</title>
+    <style>
+        :root { --gold: #af944d; --dark: #2c3e50; --bg: #ffffff; }
+        body { font-family: 'Georgia', serif; background: #f4f4f4; margin: 0; padding: 0; }
+        .book-page { background: var(--bg); max-width: 500px; margin: 20px auto; min-height: 100vh; box-shadow: 0 0 20px rgba(0,0,0,0.1); padding: 30px; }
+        .profile-img { width: 120px; height: 120px; border-radius: 60px; border: 3px solid var(--gold); display: block; margin: 0 auto 15px; object-fit: cover; }
+        h2 { text-align: center; color: var(--dark); font-family: 'Playfair Display', serif; }
+        .bio { font-style: italic; text-align: center; color: #555; line-height: 1.6; border-bottom: 1px solid #eee; padding-bottom: 20px; }
+        .message-form { margin-top: 30px; background: #fdfbf7; padding: 15px; border-radius: 10px; border: 1px solid #eee; }
+        .msg-card { background: white; padding: 15px; border-left: 4px solid var(--gold); margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .msg-author { font-weight: bold; color: var(--gold); font-size: 0.9rem; }
+        input, textarea { width: 100%; padding: 10px; margin: 5px 0; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
+        .btn { background: var(--dark); color: white; border: none; padding: 10px; width: 100%; border-radius: 5px; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="book-page">
+        <img id="defuntImg" src="https://via.placeholder.com/150" class="profile-img">
+        <h2 id="defuntNom">Chargement...</h2>
+        <p class="bio" id="defuntBio">Veuillez patienter...</p>
+
+        <div class="message-form">
+            <h4>Laisser un mot d'adieu</h4>
+            <input type="text" id="auteur" placeholder="Votre nom">
+            <textarea id="message" rows="3" placeholder="Votre message..."></textarea>
+            <button class="btn" id="sendBtn">PUBLIER DANS LE LIVRE</button>
+        </div>
+
+        <div id="messagesList" style="margin-top:30px"></div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, doc, getDoc, collection, addDoc, query, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBenDfciup5UUHxVpVEkDOC9Id3H1fvjeY",
+            authDomain: "appli-necropole-cite-des-anges.firebaseapp.com",
+            projectId: "appli-necropole-cite-des-anges",
+            storageBucket: "appli-necropole-cite-des-anges.firebasestorage.app",
+            messagingSenderId: "595944933670",
+            appId: "1:595944933670:web:f971dffb72ac72fa9619e7"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const deuilId = urlParams.get('name'); // Ici on utilise le nom comme ID pour le test
+
+        // Charger les infos du défunt
+        async function loadDefunt() {
+            const docRef = doc(db, "deuils", deuilId);
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                const data = docSnap.data();
+                document.getElementById('defuntNom').innerText = data.nom;
+                document.getElementById('defuntBio').innerText = data.biographie;
+                document.getElementById('defuntImg').src = data.photoUrl;
+            }
+        }
+
+        // Charger messages en temps réel
+        const q = query(collection(db, "deuils", deuilId, "messages"), orderBy("date", "desc"));
+        onSnapshot(q, (snapshot) => {
+            const list = document.getElementById('messagesList');
+            list.innerHTML = "";
+            snapshot.forEach(doc => {
+                const m = doc.data();
+                list.innerHTML += `<div class="msg-card"><div class="msg-author">${m.auteur}</div><p>${m.texte}</p></div>`;
+            });
+        });
+
+        // Envoyer message
+        document.getElementById('sendBtn').onclick = async () => {
+            const auteur = document.getElementById('auteur').value;
+            const texte = document.getElementById('message').value;
+            if(auteur && texte) {
+                await addDoc(collection(db, "deuils", deuilId, "messages"), {
+                    auteur, texte, date: new Date()
+                });
+                document.getElementById('message').value = "";
+            }
+        };
+
+        if(deuilId) loadDefunt();
+    </script>
+</body>
+</html>
