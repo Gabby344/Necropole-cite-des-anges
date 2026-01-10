@@ -1,72 +1,51 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Nécropole</title>
-    <style>
-        body { font-family: sans-serif; background: #eef2f7; padding: 20px; }
-        .admin-panel { background: white; padding: 20px; border-radius: 10px; max-width: 500px; margin: auto; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        h2 { border-bottom: 2px solid #2c3e50; padding-bottom: 10px; }
-        label { display: block; margin-top: 15px; font-weight: bold; }
-        input, textarea { width: 100%; padding: 10px; margin-top: 5px; border-radius: 5px; border: 1px solid #ccc; box-sizing: border-box;}
-        .btn-admin { background: #27ae60; color: white; border: none; padding: 15px; width: 100%; border-radius: 5px; margin-top: 20px; font-size: 1rem; cursor: pointer; }
-    </style>
-</head>
-<body>
-    <div class="admin-panel">
-        <h2>Créer un nouveau Livre d'Or</h2>
-        <label>Nom complet du défunt</label>
-        <input type="text" id="nom" placeholder="Ex: Jean Mukendi">
-        
-        <label>Biographie / Dates</label>
-        <textarea id="bio" rows="4" placeholder="Né le... décédé le... un homme aimé de tous."></textarea>
-        
-        <label>Lien Photo (URL)</label>
-        <input type="text" id="photoUrl" placeholder="https://image-du-defunt.jpg">
-        
-        <button class="btn-admin" id="createBtn">GÉNÉRER LE LIVRE NUMÉRIQUE</button>
-        
-        <div id="linkOutput" style="margin-top:20px; display:none; background:#d4edda; padding:10px; border-radius:5px; word-break: break-all;">
-            Lien à partager : <br><strong id="finalLink"></strong>
-        </div>
-    </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+<hr style="margin-top:30px">
+<h3>Clôturer et Imprimer un livre</h3>
+<input type="text" id="printSearch" placeholder="Nom du livre à imprimer...">
+<button class="btn-admin" style="background:#34495e" id="btnPreparePrint">PRÉPARER L'IMPRESSION</button>
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyBenDfciup5UUHxVpVEkDOC9Id3H1fvjeY",
-            authDomain: "appli-necropole-cite-des-anges.firebaseapp.com",
-            projectId: "appli-necropole-cite-des-anges",
-            storageBucket: "appli-necropole-cite-des-anges.firebasestorage.app",
-            messagingSenderId: "595944933670",
-            appId: "1:595944933670:web:f971dffb72ac72fa9619e7"
-        };
+<div id="printArea" style="display:none; padding: 40px; font-family: serif; background: white; color: black;">
+    <h1 id="pNom" style="text-align:center; font-size: 28pt;">Livre d'Or</h1>
+    <h2 id="pSoutitre" style="text-align:center; font-size: 18pt; border-bottom: 2px solid gold; padding-bottom: 20px;"></h2>
+    <div id="pMessages" style="margin-top: 30px;"></div>
+</div>
 
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
+<script type="module">
+    // ... (garde ton code Firebase précédent) ...
 
-        document.getElementById('createBtn').onclick = async () => {
-            const nom = document.getElementById('nom').value;
-            const bio = document.getElementById('bio').value;
-            const photoUrl = document.getElementById('photoUrl').value;
+    import { getFirestore, doc, getDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+    const db = getFirestore();
 
-            if(nom && bio) {
-                // On utilise le nom comme ID pour simplifier l'accès
-                await setDoc(doc(db, "deuils", nom), {
-                    nom, biographie: bio, photoUrl, dateCreation: new Date()
-                });
+    document.getElementById('btnPreparePrint').onclick = async () => {
+        const nom = document.getElementById('printSearch').value;
+        const docRef = doc(db, "deuils", nom);
+        const docSnap = await getDoc(docRef);
 
-                const link = window.location.href.replace('admin.html', 'livres.html') + "?name=" + encodeURIComponent(nom);
-                document.getElementById('finalLink').innerText = link;
-                document.getElementById('linkOutput').style.display = "block";
-                alert("Livre créé avec succès !");
-            } else {
-                alert("Veuillez remplir les champs.");
-            }
-        };
-    </script>
-</body>
-</html>
+        if (docSnap.exists()) {
+            const data = docSnap.data();
+            document.getElementById('pNom').innerText = "In Memoriam : " + data.nom;
+            document.getElementById('pSoutitre').innerText = "Livre de Souvenirs - Nécropole Cité des Anges";
+            
+            const msgSnap = await getDocs(collection(db, "deuils", nom, "messages"));
+            let htmlMsg = "";
+            msgSnap.forEach(m => {
+                const d = m.data();
+                htmlMsg += `<div style="margin-bottom:20px; border-bottom:1px dashed #ccc; padding-bottom:10px;">
+                    <b style="color:#af944d">${d.auteur} :</b><br>
+                    <p style="font-style:italic">"${d.texte}"</p>
+                </div>`;
+            });
+            document.getElementById('pMessages').innerHTML = htmlMsg;
+
+            // Lancer la génération PDF
+            const element = document.getElementById('printArea');
+            element.style.display = "block"; // Temporairement visible pour le script
+            html2pdf().from(element).save(`Livre_Or_${nom}.pdf`).then(() => {
+                element.style.display = "none";
+            });
+        } else {
+            alert("Livre introuvable.");
+        }
+    };
+</script>
