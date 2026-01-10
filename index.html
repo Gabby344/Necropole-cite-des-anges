@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nécropole Cité des Anges - Accueil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root { --gold: #af944d; --dark: #1a1a1a; --cream: #f9f7f2; }
+        body { font-family: 'Poppins', sans-serif; background: var(--cream); color: var(--dark); margin: 0; padding: 0; }
+        .hero { background: var(--dark); color: white; padding: 60px 20px; text-align: center; border-bottom: 4px solid var(--gold); }
+        h1 { font-family: 'Playfair Display', serif; font-size: 2rem; margin: 0; }
+        .container { padding: 20px; max-width: 600px; margin: auto; }
+        .search-box { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-top: -40px; }
+        input { width: 100%; padding: 15px; margin: 15px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+        .btn { background: var(--gold); color: white; border: none; padding: 15px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; }
+        .footer { text-align: center; font-size: 0.8rem; margin-top: 50px; color: #888; }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>Nécropole Cité des Anges</h1>
+        <p>Kolwezi • Mémoire Éternelle</p>
+    </div>
+    <div class="container">
+        <div class="search-box">
+            <h3 style="margin-top:0">Rechercher un Livre d'Or</h3>
+            <p style="font-size: 0.9rem; color: #666;">Entrez le nom du défunt pour laisser un message d'adieu.</p>
+            <input type="text" id="searchInp" placeholder="Nom du défunt...">
+            <button class="btn" onclick="goToBook()">OUVRIR LE LIVRE</button>
+        </div>
+        <div class="footer">© 2026 Nécropole Cité des Anges - Kolwezi. Développé par Gabriel.</div>
+    </div>
+
+    <script>
+        function goToBook() {
+            const name = document.getElementById('searchInp').value;
+            if(name) {
+                // On passe le nom en paramètre URL pour simplifier
+                window.location.href = `livres.html?name=${encodeURIComponent(name)}`;
+            }
+        }
+    </script>
+</body>
+</html>
