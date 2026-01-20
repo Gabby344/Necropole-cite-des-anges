@@ -3,25 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Livre d'Or Numérique - Cité des Anges</title>
+    <title>Livre d'Or Numérique - Angels Memorial - Cité des Anges Kolwezi</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --primary-dark: #1a1a2e;
-            --primary-light: #2c3e50;
-            --accent-gold: #b68a3d;
-            --accent-gold-light: #d4af37;
-            --light-bg: #f8f9fa;
+            --primary-dark: #0a0e17;
+            --primary-light: #1a2332;
+            --accent-gold: #c9a95e;
+            --accent-gold-light: #e6c87e;
+            --gradient-primary: linear-gradient(135deg, #0a0e17 0%, #1a2332 100%);
+            --gradient-gold: linear-gradient(135deg, #c9a95e 0%, #e6c87e 100%);
+            --gradient-blue: linear-gradient(135deg, #4a6fa5 0%, #6b93d6 100%);
+            --light-bg: linear-gradient(135deg, #f8fafc 0%, #e8edf5 100%);
             --white: #ffffff;
             --gray-light: #e9ecef;
             --gray: #6c757d;
             --success: #28a745;
             --danger: #dc3545;
             --warning: #ffc107;
-            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
+            --info: #17a2b8;
+            --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.15);
+            --shadow-gold: 0 10px 30px rgba(201, 169, 94, 0.2);
+            --transition-slow: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --radius-sm: 8px;
+            --radius-md: 15px;
+            --radius-lg: 25px;
+            --radius-xl: 35px;
         }
 
         * {
@@ -32,51 +44,94 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            background: var(--light-bg);
             color: var(--primary-dark);
             min-height: 100vh;
             line-height: 1.6;
         }
 
-        .book-container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
+        /* Navigation */
+        .top-nav {
+            background: var(--gradient-primary);
+            color: var(--white);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-md);
         }
 
-        /* Header */
-        .book-header {
-            background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-brand h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        /* Main Container */
+        .memorial-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Hero Section */
+        .memorial-hero {
+            background: var(--gradient-primary);
             color: var(--white);
-            padding: 40px;
-            border-radius: 20px;
+            padding: 60px 40px;
+            border-radius: var(--radius-xl);
             margin-bottom: 40px;
             text-align: center;
             position: relative;
             overflow: hidden;
-            box-shadow: var(--shadow);
+            box-shadow: var(--shadow-lg);
         }
 
-        .book-header::before {
+        .memorial-hero::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23b68a3d' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23c9a95e' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
             opacity: 0.2;
         }
 
-        .profile-section {
+        .profile-container {
             position: relative;
             z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
-        .profile-img-container {
-            width: 180px;
-            height: 180px;
-            margin: 0 auto 25px;
+        .profile-header {
+            margin-bottom: 40px;
+        }
+
+        .profile-img-wrapper {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 30px;
             position: relative;
         }
 
@@ -85,85 +140,120 @@
             height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            border: 5px solid var(--accent-gold);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 6px solid var(--accent-gold);
+            box-shadow: var(--shadow-gold);
+            transition: var(--transition-slow);
         }
 
-        .profile-img-placeholder {
+        .profile-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(201, 169, 94, 0.3);
+        }
+
+        .profile-placeholder {
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-light));
+            background: var(--gradient-gold);
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--white);
-            font-size: 4rem;
-            border: 5px solid var(--accent-gold);
+            font-size: 5rem;
+            border: 6px solid var(--accent-gold);
         }
 
         .memorial-name {
             font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 15px;
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 20px;
             color: var(--white);
+            line-height: 1.2;
         }
 
         .memorial-dates {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             opacity: 0.9;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             display: flex;
             justify-content: center;
-            gap: 30px;
+            gap: 40px;
             flex-wrap: wrap;
         }
 
+        .date-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: var(--radius-lg);
+            backdrop-filter: blur(10px);
+        }
+
         .memorial-bio {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             line-height: 1.8;
             max-width: 800px;
             margin: 0 auto;
             opacity: 0.95;
-            font-style: italic;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-lg);
+            border-left: 4px solid var(--accent-gold);
         }
 
         /* Message Form */
         .message-form-section {
             background: var(--white);
-            padding: 40px;
-            border-radius: 20px;
+            padding: 50px;
+            border-radius: var(--radius-lg);
             margin-bottom: 40px;
-            box-shadow: var(--shadow);
+            box-shadow: var(--shadow-md);
+            animation: fadeInUp 0.8s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .section-title {
             font-family: 'Playfair Display', serif;
-            font-size: 2rem;
+            font-size: 2.5rem;
             color: var(--primary-dark);
             margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
             padding-bottom: 15px;
-            border-bottom: 2px solid var(--gray-light);
+            border-bottom: 3px solid var(--accent-gold);
         }
 
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
 
         .form-label {
             display: block;
             font-weight: 600;
-            margin-bottom: 10px;
-            color: var(--primary-light);
-            font-size: 1rem;
+            margin-bottom: 15px;
+            color: var(--primary-dark);
+            font-size: 1.1rem;
         }
 
         .form-control {
             width: 100%;
-            padding: 16px;
+            padding: 18px 25px;
             border: 2px solid var(--gray-light);
-            border-radius: 10px;
+            border-radius: var(--radius-md);
             font-family: 'Poppins', sans-serif;
             font-size: 1rem;
             transition: var(--transition);
@@ -173,42 +263,70 @@
         .form-control:focus {
             outline: none;
             border-color: var(--accent-gold);
-            box-shadow: 0 0 0 3px rgba(182, 138, 61, 0.1);
+            box-shadow: 0 0 0 4px rgba(201, 169, 94, 0.1);
+            background: var(--white);
         }
 
         textarea.form-control {
-            min-height: 150px;
+            min-height: 180px;
             resize: vertical;
+            line-height: 1.6;
         }
 
+        /* Character Counter */
+        .char-counter {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .char-counter.warning {
+            color: var(--warning);
+        }
+
+        .char-counter.danger {
+            color: var(--danger);
+        }
+
+        /* Buttons */
         .btn {
-            padding: 16px 35px;
-            font-size: 1.1rem;
-            font-weight: 600;
+            padding: 18px 35px;
             border: none;
-            border-radius: 10px;
+            border-radius: var(--radius-md);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
             cursor: pointer;
             transition: var(--transition);
-            font-family: 'Poppins', sans-serif;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 12px;
+            text-decoration: none;
         }
 
         .btn-primary {
-            background: linear-gradient(to right, var(--accent-gold), var(--accent-gold-light));
+            background: var(--gradient-gold);
             color: var(--white);
         }
 
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(182, 138, 61, 0.3);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-gold);
         }
 
         .btn-secondary {
-            background: var(--primary-light);
-            color: var(--white);
+            background: var(--white);
+            color: var(--primary-dark);
+            border: 2px solid var(--gray-light);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
         }
 
         .btn-danger {
@@ -216,40 +334,90 @@
             color: var(--white);
         }
 
+        .btn-success {
+            background: var(--success);
+            color: var(--white);
+        }
+
+        .btn-info {
+            background: var(--info);
+            color: var(--white);
+        }
+
         .btn-small {
-            padding: 8px 16px;
+            padding: 10px 20px;
             font-size: 0.9rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 30px;
         }
 
         /* Messages Section */
         .messages-section {
             background: var(--white);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: var(--shadow);
+            padding: 50px;
+            border-radius: var(--radius-lg);
+            margin-bottom: 40px;
+            box-shadow: var(--shadow-md);
         }
 
         .messages-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 20px;
+        }
+
+        .messages-stats {
+            display: flex;
+            align-items: center;
+            gap: 20px;
         }
 
         .messages-count {
-            font-size: 1rem;
+            font-size: 1.1rem;
             color: var(--gray);
             background: var(--light-bg);
-            padding: 8px 16px;
-            border-radius: 20px;
+            padding: 10px 20px;
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sort-options {
+            display: flex;
+            gap: 10px;
+        }
+
+        .sort-btn {
+            padding: 10px 20px;
+            background: var(--light-bg);
+            border: 2px solid transparent;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .sort-btn.active {
+            background: var(--gradient-gold);
+            color: var(--white);
+        }
+
+        .sort-btn:hover {
+            border-color: var(--accent-gold);
         }
 
         .messages-container {
             display: flex;
             flex-direction: column;
-            gap: 25px;
+            gap: 30px;
             max-height: 800px;
             overflow-y: auto;
             padding-right: 10px;
@@ -258,142 +426,171 @@
         /* Message Card */
         .message-card {
             background: var(--light-bg);
-            border-radius: 15px;
-            padding: 25px;
+            border-radius: var(--radius-lg);
+            padding: 35px;
             position: relative;
-            border-left: 4px solid var(--accent-gold);
+            border-left: 5px solid var(--accent-gold);
             transition: var(--transition);
-            animation: fadeIn 0.5s ease;
+            animation: slideIn 0.5s ease;
+            opacity: 0;
+            animation-fill-mode: forwards;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .message-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-md);
+        }
+
+        .message-card.own-message {
+            background: linear-gradient(135deg, rgba(201, 169, 94, 0.05) 0%, rgba(230, 200, 126, 0.05) 100%);
+            border-left-color: var(--success);
         }
 
         .message-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 15px;
         }
 
         .message-author {
             font-weight: 700;
             color: var(--primary-dark);
-            font-size: 1.1rem;
+            font-size: 1.3rem;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
         }
 
-        .message-author i {
-            color: var(--accent-gold);
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.5rem;
         }
 
         .message-date {
             color: var(--gray);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-style: italic;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .message-content {
             color: var(--primary-light);
             line-height: 1.8;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             white-space: pre-wrap;
             word-wrap: break-word;
+            font-size: 1.1rem;
         }
 
         .message-actions {
             display: flex;
-            gap: 10px;
+            gap: 15px;
             justify-content: flex-end;
             opacity: 0;
             transition: var(--transition);
         }
 
-        .message-card:hover .message-actions {
-            opacity: 1;
-        }
-
+        .message-card:hover .message-actions,
         .message-card.own-message .message-actions {
             opacity: 1;
         }
 
         .message-edited {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: var(--gray);
             font-style: italic;
-            margin-top: 10px;
+            margin-top: 15px;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 8px;
         }
 
+        /* No Messages */
         .no-messages {
             text-align: center;
-            padding: 60px 20px;
+            padding: 80px 40px;
             color: var(--gray);
+            background: var(--light-bg);
+            border-radius: var(--radius-lg);
+            border: 3px dashed var(--gray-light);
         }
 
         .no-messages-icon {
-            font-size: 4rem;
+            font-size: 5rem;
             color: var(--gray-light);
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
 
         /* Error State */
         .error-state {
             text-align: center;
             padding: 100px 20px;
-            max-width: 600px;
+            max-width: 800px;
             margin: 0 auto;
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
         }
 
         .error-icon {
-            font-size: 5rem;
+            font-size: 6rem;
             color: var(--accent-gold);
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             opacity: 0.7;
         }
 
         .error-title {
             font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
+            font-size: 3rem;
             color: var(--primary-dark);
             margin-bottom: 20px;
         }
 
         .error-message {
             color: var(--gray);
-            font-size: 1.1rem;
+            font-size: 1.3rem;
             line-height: 1.6;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
 
         /* Loading */
         .loading {
             text-align: center;
-            padding: 60px 20px;
+            padding: 100px 20px;
             color: var(--gray);
         }
 
         .loading-spinner {
-            width: 50px;
-            height: 50px;
-            border: 3px solid var(--gray-light);
+            width: 70px;
+            height: 70px;
+            border: 4px solid var(--gray-light);
             border-top-color: var(--accent-gold);
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
+            margin: 0 auto 30px;
         }
 
         @keyframes spin {
@@ -405,16 +602,17 @@
             position: fixed;
             top: 20px;
             right: 20px;
-            padding: 20px 25px;
-            border-radius: 10px;
+            padding: 20px 30px;
+            border-radius: var(--radius-md);
             color: var(--white);
             font-weight: 500;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
             z-index: 10000;
             animation: slideInRight 0.3s ease;
-            max-width: 400px;
+            max-width: 450px;
+            box-shadow: var(--shadow-lg);
         }
 
         @keyframes slideInRight {
@@ -428,62 +626,222 @@
         }
 
         .toast-success {
-            background: var(--success);
+            background: linear-gradient(135deg, var(--success) 0%, #20c997 100%);
         }
 
         .toast-error {
-            background: var(--danger);
+            background: linear-gradient(135deg, var(--danger) 0%, #e83e8c 100%);
         }
 
         .toast-info {
-            background: var(--primary-light);
+            background: linear-gradient(135deg, var(--info) 0%, #4a6fa5 100%);
+        }
+
+        .toast-warning {
+            background: linear-gradient(135deg, var(--warning) 0%, #fd7e14 100%);
+        }
+
+        /* Share Button */
+        .share-fab {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: var(--gradient-gold);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            cursor: pointer;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+            z-index: 100;
+        }
+
+        .share-fab:hover {
+            transform: scale(1.1) rotate(15deg);
+            box-shadow: 0 15px 30px rgba(201, 169, 94, 0.4);
         }
 
         /* Back Button */
         .back-button {
             position: fixed;
-            bottom: 30px;
-            left: 30px;
+            bottom: 40px;
+            left: 40px;
             z-index: 100;
         }
 
         .back-btn {
-            background: var(--primary-dark);
-            color: var(--white);
-            width: 60px;
-            height: 60px;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
+            background: var(--gradient-primary);
+            color: var(--white);
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 1.8rem;
             text-decoration: none;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--shadow-lg);
             transition: var(--transition);
         }
 
         .back-btn:hover {
-            background: var(--accent-gold);
             transform: scale(1.1);
+            background: var(--gradient-gold);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 14, 23, 0.9);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: var(--white);
+            padding: 50px;
+            border-radius: var(--radius-xl);
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            animation: slideUp 0.5s ease;
+            box-shadow: var(--shadow-lg);
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(40px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: var(--gray);
+            cursor: pointer;
+            transition: var(--transition);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-modal:hover {
+            background: var(--gray-light);
+            color: var(--danger);
+        }
+
+        .modal-icon {
+            font-size: 5rem;
+            color: var(--accent-gold);
+            margin-bottom: 30px;
+        }
+
+        .modal-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--primary-dark);
+            margin-bottom: 20px;
+        }
+
+        /* Edit Form */
+        .edit-form {
+            background: var(--light-bg);
+            padding: 40px;
+            border-radius: var(--radius-lg);
+            margin-top: 30px;
+            border: 2px solid var(--accent-gold);
+            display: none;
+        }
+
+        /* Candle Animation */
+        .candle-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .candle {
+            position: absolute;
+            width: 2px;
+            height: 30px;
+            background: var(--accent-gold);
+            animation: flicker 3s infinite;
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 0.3; }
         }
 
         /* Responsive */
+        @media (max-width: 1024px) {
+            .memorial-container {
+                padding: 30px 15px;
+            }
+            
+            .memorial-hero {
+                padding: 40px 30px;
+            }
+            
+            .memorial-name {
+                font-size: 2.8rem;
+            }
+            
+            .message-form-section,
+            .messages-section {
+                padding: 40px 30px;
+            }
+        }
+
         @media (max-width: 768px) {
-            .book-header {
-                padding: 30px 20px;
+            .top-nav {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
             }
             
             .memorial-name {
                 font-size: 2.2rem;
             }
             
-            .profile-img-container {
-                width: 140px;
-                height: 140px;
+            .profile-img-wrapper {
+                width: 150px;
+                height: 150px;
             }
             
-            .message-form-section,
-            .messages-section {
-                padding: 30px 20px;
+            .memorial-dates {
+                flex-direction: column;
+                gap: 15px;
             }
             
             .messages-header {
@@ -491,28 +849,51 @@
                 align-items: flex-start;
             }
             
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .message-form-section,
+            .messages-section {
+                padding: 30px 20px;
+            }
+            
+            .share-fab,
             .back-button {
                 bottom: 20px;
+                right: 20px;
+                left: 20px;
+            }
+            
+            .share-fab {
+                right: 20px;
+            }
+            
+            .back-button {
                 left: 20px;
             }
         }
 
         @media (max-width: 480px) {
-            .book-container {
-                padding: 10px;
-            }
-            
             .memorial-name {
                 font-size: 1.8rem;
             }
             
-            .memorial-dates {
+            .profile-img-wrapper {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .action-buttons {
                 flex-direction: column;
-                gap: 10px;
             }
             
             .btn {
                 width: 100%;
+            }
+            
+            .message-author {
+                font-size: 1.1rem;
             }
             
             .message-actions {
@@ -522,112 +903,258 @@
 
         /* Custom Scrollbar */
         .messages-container::-webkit-scrollbar {
-            width: 8px;
+            width: 10px;
         }
 
         .messages-container::-webkit-scrollbar-track {
             background: var(--gray-light);
-            border-radius: 4px;
+            border-radius: var(--radius-md);
         }
 
         .messages-container::-webkit-scrollbar-thumb {
-            background: var(--accent-gold);
-            border-radius: 4px;
+            background: var(--gradient-gold);
+            border-radius: var(--radius-md);
         }
 
         .messages-container::-webkit-scrollbar-thumb:hover {
             background: var(--accent-gold-light);
         }
+
+        /* Print Styles */
+        @media print {
+            .top-nav,
+            .share-fab,
+            .back-button,
+            .message-actions,
+            .action-buttons {
+                display: none !important;
+            }
+            
+            .message-form-section {
+                display: none !important;
+            }
+            
+            .memorial-container {
+                padding: 0;
+                margin: 0;
+            }
+            
+            body {
+                background: white !important;
+            }
+        }
+
+        /* Floating Hearts Animation */
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -2;
+        }
+
+        .heart {
+            position: absolute;
+            color: rgba(201, 169, 94, 0.1);
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Quote of the Day */
+        .quote-container {
+            background: var(--gradient-primary);
+            color: var(--white);
+            padding: 30px;
+            border-radius: var(--radius-lg);
+            margin-bottom: 40px;
+            text-align: center;
+            font-style: italic;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quote-container::before {
+            content: '"';
+            position: absolute;
+            font-family: 'Playfair Display', serif;
+            font-size: 15rem;
+            color: rgba(255, 255, 255, 0.05);
+            top: -50px;
+            left: 20px;
+        }
+
+        .quote-text {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .quote-author {
+            color: var(--accent-gold);
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
-    <!-- Error State (hidden by default) -->
+    <!-- Navigation -->
+    <nav class="top-nav">
+        <div class="nav-brand">
+            <div style="width: 50px; height: 50px; background: var(--gradient-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;">
+                <i class="fas fa-angel"></i>
+            </div>
+            <div>
+                <h1>Angels Memorial</h1>
+                <p style="font-size: 0.9rem; opacity: 0.8;">Livre d'Or Éternel</p>
+            </div>
+        </div>
+        
+        <div class="nav-actions">
+            <div id="memorialStats" style="display: flex; gap: 20px; align-items: center;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <i class="fas fa-eye" style="color: var(--accent-gold);"></i>
+                    <span id="viewCount">0</span> vues
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <i class="fas fa-comment" style="color: var(--accent-gold);"></i>
+                    <span id="messageCountHeader">0</span> messages
+                </div>
+            </div>
+            
+            <a href="index.html" class="btn btn-secondary btn-small">
+                <i class="fas fa-home"></i> Accueil
+            </a>
+        </div>
+    </nav>
+
+    <!-- Error State -->
     <div id="errorState" class="error-state" style="display: none;">
         <div class="error-icon">
-            <i class="fas fa-book"></i>
+            <i class="fas fa-book-heart"></i>
         </div>
         <h1 class="error-title" id="errorTitle">Livre d'Or Introuvable</h1>
         <p class="error-message" id="errorMessage">
-            Le livre d'or que vous cherchez n'existe pas encore.
+            Le livre d'or que vous cherchez n'existe pas ou a été déplacé.
         </p>
-        <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-            <button class="btn btn-primary" onclick="window.location.href='index.html'">
+        <div class="action-buttons" style="justify-content: center;">
+            <a href="index.html" class="btn btn-primary">
                 <i class="fas fa-home"></i> Retour à l'accueil
-            </button>
-            <button class="btn btn-secondary" onclick="window.location.href='admin.html'">
-                <i class="fas fa-lock"></i> Créer un livre d'or
+            </a>
+            <button class="btn btn-secondary" onclick="contactAdmin()">
+                <i class="fas fa-headset"></i> Contacter l'administration
             </button>
         </div>
     </div>
 
-    <!-- Main Content (hidden by default) -->
+    <!-- Loading -->
+    <div class="loading" id="loadingState">
+        <div class="loading-spinner"></div>
+        <h2 style="color: var(--primary-dark); margin-bottom: 15px;">Chargement du livre d'or...</h2>
+        <p style="color: var(--gray);">Préparation de l'espace mémoire</p>
+    </div>
+
+    <!-- Main Content -->
     <div id="mainContent" style="display: none;">
-        <div class="book-container">
-            <!-- Header with Memorial Info -->
-            <header class="book-header" id="memorialHeader">
-                <div class="profile-section">
-                    <div class="profile-img-container" id="profileImgContainer">
-                        <!-- Image will be loaded here -->
-                    </div>
-                    
-                    <h1 class="memorial-name" id="memorialName">Chargement...</h1>
-                    
-                    <div class="memorial-dates" id="memorialDates">
-                        <!-- Dates will be loaded here -->
+        <div class="memorial-container">
+            <!-- Quote of the Day -->
+            <div class="quote-container">
+                <p class="quote-text" id="dailyQuote">
+                    "Le souvenir est le seul paradis dont nous ne pouvons être chassés."
+                </p>
+                <p class="quote-author">— Jean Paul</p>
+            </div>
+
+            <!-- Hero Section -->
+            <div class="memorial-hero">
+                <div class="profile-container">
+                    <div class="profile-header">
+                        <div class="profile-img-wrapper">
+                            <div id="profileImgContainer">
+                                <!-- Image will be loaded here -->
+                            </div>
+                        </div>
+                        
+                        <h1 class="memorial-name" id="memorialName">Chargement...</h1>
+                        
+                        <div class="memorial-dates" id="memorialDates">
+                            <!-- Dates will be loaded here -->
+                        </div>
                     </div>
                     
                     <div class="memorial-bio" id="memorialBio">
                         <!-- Biography will be loaded here -->
                     </div>
                 </div>
-            </header>
+            </div>
 
             <!-- Message Form -->
             <section class="message-form-section">
                 <h2 class="section-title">
-                    <i class="fas fa-feather-alt"></i> Laisser un Message d'Hommage
+                    <i class="fas fa-feather"></i> Laisser un Message d'Hommage
                 </h2>
                 
                 <div id="messageForm">
                     <div class="form-group">
-                        <label class="form-label">Votre nom</label>
+                        <label class="form-label">Votre nom ou relation *</label>
                         <input type="text" 
                                id="auteur" 
                                class="form-control" 
-                               placeholder="Votre nom ou relation avec le défunt"
+                               placeholder="Ex: Jean, ami de la famille, cousin..."
                                required>
+                        <small style="color: var(--gray); display: block; margin-top: 8px;">
+                            Vous pouvez utiliser un prénom seulement si vous préférez
+                        </small>
                     </div>
                     
                     <div class="form-group">
-                        <label class="form-label">Votre message d'adieu</label>
+                        <label class="form-label">Votre message d'adieu *</label>
                         <textarea 
                             id="message" 
                             class="form-control" 
                             rows="6"
-                            placeholder="Écrivez votre message de réconfort, souvenir ou hommage ici..."
+                            placeholder="Partagez un souvenir, un message de réconfort, une prière, ou exprimez vos condoléances..."
                             required></textarea>
-                        <div style="display: flex; justify-content: space-between; margin-top: 8px;">
-                            <small style="color: var(--gray);">
-                                <i class="fas fa-info-circle"></i> Votre message sera visible par tous les proches
-                            </small>
-                            <small style="color: var(--gray);" id="charCount">0/500 caractères</small>
+                        <div class="char-counter" id="charCounter">
+                            <span><i class="fas fa-info-circle"></i> Votre message sera visible par tous les proches</span>
+                            <span id="charCount">0/500 caractères</span>
                         </div>
                     </div>
                     
-                    <div class="form-group">
-                        <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-                            <button class="btn btn-primary" id="sendBtn">
-                                <i class="fas fa-paper-plane"></i> PUBLIER VOTRE MESSAGE
-                            </button>
-                            <button class="btn btn-secondary" onclick="clearForm()">
-                                <i class="fas fa-eraser"></i> EFFACER
-                            </button>
-                        </div>
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" id="sendBtn">
+                            <i class="fas fa-paper-plane"></i> PUBLIER VOTRE MESSAGE
+                        </button>
+                        <button class="btn btn-secondary" onclick="clearForm()">
+                            <i class="fas fa-eraser"></i> EFFACER LE MESSAGE
+                        </button>
+                        <button class="btn btn-info" onclick="showMessageTips()">
+                            <i class="fas fa-lightbulb"></i> CONSEILS D'ÉCRITURE
+                        </button>
                     </div>
                 </div>
                 
-                <div id="editForm" style="display: none;">
-                    <h3 style="color: var(--accent-gold); margin-bottom: 20px;">
+                <!-- Edit Form (Hidden) -->
+                <div class="edit-form" id="editForm">
+                    <h3 style="color: var(--accent-gold); margin-bottom: 25px; display: flex; align-items: center; gap: 15px;">
                         <i class="fas fa-edit"></i> Modifier votre message
                     </h3>
                     <div class="form-group">
@@ -637,10 +1164,13 @@
                     <div class="form-group">
                         <label class="form-label">Votre message</label>
                         <textarea id="editContent" class="form-control" rows="6"></textarea>
+                        <div class="char-counter" id="editCharCounter">
+                            <span id="editCharCount">0/500 caractères</span>
+                        </div>
                     </div>
-                    <div style="display: flex; gap: 15px;">
+                    <div class="action-buttons">
                         <button class="btn btn-primary" id="saveEditBtn">
-                            <i class="fas fa-save"></i> ENREGISTRER
+                            <i class="fas fa-save"></i> ENREGISTRER LES MODIFICATIONS
                         </button>
                         <button class="btn btn-secondary" onclick="cancelEdit()">
                             <i class="fas fa-times"></i> ANNULER
@@ -655,33 +1185,56 @@
                     <h2 class="section-title">
                         <i class="fas fa-book-open"></i> Messages d'Hommage
                     </h2>
-                    <div class="messages-count" id="messagesCount">
-                        <span id="messageCount">0</span> message(s)
+                    
+                    <div class="messages-stats">
+                        <div class="messages-count">
+                            <i class="fas fa-comments"></i>
+                            <span id="messagesCount">0</span> message(s)
+                        </div>
+                        
+                        <div class="sort-options">
+                            <button class="sort-btn active" onclick="sortMessages('recent')">
+                                <i class="fas fa-clock"></i> Récents
+                            </button>
+                            <button class="sort-btn" onclick="sortMessages('oldest')">
+                                <i class="fas fa-history"></i> Anciens
+                            </button>
+                        </div>
                     </div>
                 </div>
                 
                 <div class="messages-container" id="messagesContainer">
-                    <!-- Loading State -->
-                    <div class="loading" id="loadingMessages">
-                        <div class="loading-spinner"></div>
-                        <p>Chargement des messages...</p>
+                    <!-- Messages will be loaded here -->
+                </div>
+                
+                <!-- No Messages -->
+                <div class="no-messages" id="noMessages" style="display: none;">
+                    <div class="no-messages-icon">
+                        <i class="far fa-comment-dots"></i>
                     </div>
+                    <h3 style="color: var(--primary-dark); margin-bottom: 20px; font-size: 1.8rem;">
+                        Aucun message pour le moment
+                    </h3>
+                    <p style="color: var(--gray); max-width: 500px; margin: 0 auto 30px; font-size: 1.1rem;">
+                        Soyez le premier à honorer la mémoire de cette personne en partageant 
+                        un souvenir, un message de réconfort ou vos condoléances.
+                    </p>
+                    <button class="btn btn-primary" onclick="scrollToForm()">
+                        <i class="fas fa-pen"></i> Écrire le premier message
+                    </button>
+                </div>
+                
+                <!-- Loading Messages -->
+                <div class="loading" id="loadingMessages" style="display: none;">
+                    <div class="loading-spinner"></div>
+                    <p>Chargement des messages...</p>
                 </div>
             </section>
+        </div>
 
-            <!-- No Messages State -->
-            <div class="no-messages" id="noMessages" style="display: none;">
-                <div class="no-messages-icon">
-                    <i class="far fa-comment-dots"></i>
-                </div>
-                <h3 style="color: var(--primary-dark); margin-bottom: 15px;">
-                    Aucun message pour le moment
-                </h3>
-                <p style="color: var(--gray); max-width: 500px; margin: 0 auto;">
-                    Soyez le premier à laisser un message d'hommage et de réconfort 
-                    pour honorer la mémoire de cette personne.
-                </p>
-            </div>
+        <!-- Share FAB -->
+        <div class="share-fab" onclick="openShareModal()" title="Partager ce livre d'or">
+            <i class="fas fa-share-alt"></i>
         </div>
 
         <!-- Back Button -->
@@ -690,66 +1243,138 @@
                 <i class="fas fa-home"></i>
             </a>
         </div>
+    </div>
 
-        <!-- Modals -->
-        <div id="deleteModal" class="modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title">
-                        <i class="fas fa-exclamation-triangle"></i> Confirmer la suppression
-                    </h3>
-                    <button class="close-modal" onclick="closeModal('deleteModal')">&times;</button>
-                </div>
-                <p id="deleteMessage" style="color: var(--gray); line-height: 1.6; margin-bottom: 30px;">
-                    Êtes-vous sûr de vouloir supprimer votre message ? Cette action est irréversible.
-                </p>
-                <div style="display: flex; gap: 15px;">
-                    <button class="btn btn-secondary" onclick="closeModal('deleteModal')">
-                        <i class="fas fa-times"></i> Annuler
-                    </button>
-                    <button class="btn btn-danger" id="confirmDelete">
-                        <i class="fas fa-trash"></i> Supprimer
-                    </button>
-                </div>
+    <!-- Modals -->
+    <div id="deleteModal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('deleteModal')">&times;</button>
+            <div class="modal-icon">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <h2 class="modal-title">Confirmer la suppression</h2>
+            <p id="deleteMessage" style="color: var(--gray); line-height: 1.6; margin-bottom: 30px; font-size: 1.1rem;">
+                Êtes-vous sûr de vouloir supprimer votre message ? Cette action est irréversible.
+            </p>
+            <div class="action-buttons">
+                <button class="btn btn-secondary" onclick="closeModal('deleteModal')">
+                    <i class="fas fa-times"></i> Annuler
+                </button>
+                <button class="btn btn-danger" id="confirmDelete">
+                    <i class="fas fa-trash"></i> Supprimer définitivement
+                </button>
             </div>
         </div>
+    </div>
 
-        <div id="shareModal" class="modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title">
-                        <i class="fas fa-share-alt"></i> Partager ce livre d'or
-                    </h3>
-                    <button class="close-modal" onclick="closeModal('shareModal')">&times;</button>
-                </div>
-                <p style="color: var(--gray); margin-bottom: 25px;">
-                    Partagez ce livre d'or avec d'autres proches pour qu'ils puissent 
-                    également laisser leurs messages d'hommage.
-                </p>
-                <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 30px;">
-                    <button class="btn btn-primary" onclick="shareWhatsApp()" style="flex: 1;">
-                        <i class="fab fa-whatsapp"></i> WhatsApp
-                    </button>
-                    <button class="btn btn-secondary" onclick="copyLink()" style="flex: 1;">
-                        <i class="fas fa-copy"></i> Copier le lien
-                    </button>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Lien du livre d'or</label>
+    <div id="shareModal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('shareModal')">&times;</button>
+            <div class="modal-icon">
+                <i class="fas fa-share-alt"></i>
+            </div>
+            <h2 class="modal-title">Partager ce livre d'or</h2>
+            <p style="color: var(--gray); margin-bottom: 30px; font-size: 1.1rem;">
+                Partagez ce livre d'or avec d'autres proches pour qu'ils puissent 
+                également laisser leurs messages d'hommage et préserver la mémoire.
+            </p>
+            
+            <div class="action-buttons" style="margin-bottom: 30px;">
+                <button class="btn btn-primary" onclick="shareWhatsApp()">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </button>
+                <button class="btn" style="background: #1877f2; color: white;" onclick="shareFacebook()">
+                    <i class="fab fa-facebook"></i> Facebook
+                </button>
+                <button class="btn btn-info" onclick="copyLink()">
+                    <i class="fas fa-copy"></i> Copier le lien
+                </button>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Lien du livre d'or</label>
+                <div style="display: flex; gap: 10px;">
                     <input type="text" 
                            id="shareLink" 
                            class="form-control" 
                            readonly
-                           style="background: var(--light-bg); cursor: pointer;"
+                           style="flex: 1;"
                            onclick="this.select()">
+                    <button class="btn btn-small" onclick="copyLink()" style="white-space: nowrap;">
+                        <i class="fas fa-copy"></i> Copier
+                    </button>
                 </div>
             </div>
+            
+            <div style="margin-top: 30px; padding: 20px; background: var(--light-bg); border-radius: var(--radius-md);">
+                <h4 style="color: var(--primary-dark); margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-qrcode"></i> QR Code du livre d'or
+                </h4>
+                <div id="qrCodeContainer" style="text-align: center; margin: 20px 0;">
+                    <!-- QR Code will be generated here -->
+                </div>
+                <button class="btn btn-secondary" onclick="downloadQRCode()" style="width: 100%;">
+                    <i class="fas fa-download"></i> Télécharger le QR Code
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="tipsModal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('tipsModal')">&times;</button>
+            <div class="modal-icon">
+                <i class="fas fa-lightbulb"></i>
+            </div>
+            <h2 class="modal-title">Conseils pour votre message</h2>
+            
+            <div style="text-align: left; color: var(--gray); line-height: 1.8;">
+                <div style="margin-bottom: 25px;">
+                    <h4 style="color: var(--primary-dark); margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-heart"></i> Écrire avec cœur
+                    </h4>
+                    <p>
+                        Parlez de vos souvenirs, de ce que la personne représentait pour vous, 
+                        ou exprimez simplement votre soutien à la famille.
+                    </p>
+                </div>
+                
+                <div style="margin-bottom: 25px;">
+                    <h4 style="color: var(--primary-dark); margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-star"></i> Idées de messages
+                    </h4>
+                    <ul style="padding-left: 20px;">
+                        <li>Un souvenir personnel que vous chérissez</li>
+                        <li>Une qualité que vous admirez chez la personne</li>
+                        <li>Un message de réconfort pour la famille</li>
+                        <li>Une prière ou pensée spirituelle</li>
+                        <li>Un remerciement pour son impact sur votre vie</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 style="color: var(--primary-dark); margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-shield-alt"></i> Respect et discrétion
+                    </h4>
+                    <p>
+                        Votre message sera visible par tous les visiteurs du livre d'or. 
+                        Écrivez avec respect et sensibilité.
+                    </p>
+                </div>
+            </div>
+            
+            <button class="btn btn-primary" onclick="closeModal('tipsModal')" style="margin-top: 30px;">
+                <i class="fas fa-check"></i> J'ai compris
+            </button>
         </div>
     </div>
 
     <!-- Toast Container -->
     <div id="toastContainer"></div>
 
+    <!-- Decorative Elements -->
+    <div class="floating-hearts" id="floatingHearts"></div>
+    
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { 
@@ -764,9 +1389,12 @@
             deleteDoc,
             updateDoc,
             Timestamp,
-            getDocs
+            getDocs,
+            increment,
+            setDoc
         } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
+        // Firebase Configuration
         const firebaseConfig = {
             apiKey: "AIzaSyBenDfciup5UUHxVpVEkDOC9Id3H1fvjeY",
             authDomain: "appli-necropole-cite-des-anges.firebaseapp.com",
@@ -779,115 +1407,134 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // Variables globales
+        // Global Variables
         let currentMemorialId = null;
         let currentMessageId = null;
         let isEditing = false;
         let userSessionId = null;
         let messages = new Map();
         let memorialData = null;
+        let currentSort = 'recent';
 
-        // Initialisation
+        // Initialize
         document.addEventListener('DOMContentLoaded', async () => {
-            // Générer un ID de session pour l'utilisateur
-            userSessionId = localStorage.getItem('userSessionId') || 
-                           'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-            localStorage.setItem('userSessionId', userSessionId);
+            // Generate unique session ID for user
+            userSessionId = localStorage.getItem('userSessionId');
+            if (!userSessionId) {
+                userSessionId = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 12);
+                localStorage.setItem('userSessionId', userSessionId);
+            }
             
-            // Récupérer l'ID du livre depuis l'URL
+            // Get memorial ID from URL
             const urlParams = new URLSearchParams(window.location.search);
-            const nameParam = urlParams.get('name');
             const idParam = urlParams.get('id');
             
-            // Essayer d'abord avec l'ID, puis avec le nom
-            currentMemorialId = idParam || nameParam;
-            
-            if (!currentMemorialId) {
-                showError('Aucun livre d\'or spécifié', 'Veuillez sélectionner un livre d\'or depuis la page d\'accueil.');
+            if (!idParam) {
+                showError('Livre d\'or non spécifié', 'Veuillez sélectionner un livre d\'or depuis la page d\'accueil.');
                 return;
             }
             
-            // Chercher le livre dans Firebase
-            await findAndLoadMemorial();
+            currentMemorialId = idParam;
+            
+            // Load memorial
+            await loadMemorial();
+            
+            // Initialize decorative elements
+            createFloatingHearts();
+            loadDailyQuote();
         });
 
-        // Chercher et charger le livre
-        async function findAndLoadMemorial() {
+        // Load memorial data
+        async function loadMemorial() {
             try {
-                // Essayer de charger directement avec l'ID
+                showLoading(true);
+                
                 const docRef = doc(db, "deuils", currentMemorialId);
                 const docSnap = await getDoc(docRef);
                 
-                if (docSnap.exists()) {
-                    // Livre trouvé avec l'ID exact
-                    memorialData = docSnap.data();
-                    await loadMemorialUI();
+                if (!docSnap.exists()) {
+                    showError('Livre d\'or introuvable', `Le livre d'or que vous cherchez n'existe pas. Il a peut-être été supprimé ou déplacé.`);
                     return;
                 }
                 
-                // Si non trouvé, chercher dans tous les livres par nom
-                console.log("Recherche par nom...");
-                const querySnapshot = await getDocs(collection(db, "deuils"));
+                memorialData = docSnap.data();
                 
-                let foundMemorial = null;
-                let foundId = null;
+                // Update view count
+                await updateViewCount();
                 
-                querySnapshot.forEach((doc) => {
-                    const data = doc.data();
-                    // Vérifier si le nom correspond (insensible à la casse)
-                    if (data.nom && data.nom.toLowerCase() === currentMemorialId.toLowerCase()) {
-                        foundMemorial = data;
-                        foundId = doc.id;
-                    }
-                    // Vérifier aussi si l'ID contient le nom
-                    else if (doc.id.toLowerCase().includes(currentMemorialId.toLowerCase().replace(/\s+/g, '_'))) {
-                        foundMemorial = data;
-                        foundId = doc.id;
-                    }
-                });
+                // Load UI
+                await loadMemorialUI();
                 
-                if (foundMemorial && foundId) {
-                    currentMemorialId = foundId;
-                    memorialData = foundMemorial;
-                    await loadMemorialUI();
-                } else {
-                    showError(
-                        'Livre d\'or non trouvé',
-                        `Le livre "${currentMemorialId}" n'existe pas encore. Veuillez le créer via l'interface d'administration.`
-                    );
-                }
+                // Start real-time messages listener
+                startMessagesListener();
+                
+                // Setup event listeners
+                setupEventListeners();
+                
+                // Show main content
+                document.getElementById('loadingState').style.display = 'none';
+                document.getElementById('mainContent').style.display = 'block';
+                
+                // Scroll to top smoothly
+                window.scrollTo({ top: 0, behavior: 'smooth' });
                 
             } catch (error) {
-                console.error("Erreur recherche livre:", error);
-                showError(
-                    'Erreur de connexion',
-                    'Impossible de se connecter à la base de données. Veuillez réessayer plus tard.'
-                );
+                console.error("Erreur chargement livre:", error);
+                showError('Erreur de chargement', 'Impossible de charger le livre d\'or. Veuillez réessayer plus tard.');
+            } finally {
+                showLoading(false);
             }
         }
 
-        // Charger l'interface du livre
+        // Update view count
+        async function updateViewCount() {
+            try {
+                // Increment view count in memorial document
+                await updateDoc(doc(db, "deuils", currentMemorialId), {
+                    views: increment(1)
+                });
+                
+                // Also track individual view in analytics
+                const viewId = 'view_' + Date.now() + '_' + userSessionId;
+                await setDoc(doc(db, "deuils", currentMemorialId, "analytics", viewId), {
+                    sessionId: userSessionId,
+                    timestamp: Timestamp.now(),
+                    userAgent: navigator.userAgent
+                });
+                
+            } catch (error) {
+                console.error("Erreur mise à jour vues:", error);
+            }
+        }
+
+        // Load memorial UI
         async function loadMemorialUI() {
             if (!memorialData) return;
             
-            // Afficher le contenu principal
-            document.getElementById('mainContent').style.display = 'block';
-            
-            // Mettre à jour l'interface
+            // Set memorial name
             document.getElementById('memorialName').textContent = memorialData.nom || 'Mémoire Éternelle';
             
-            // Image de profil
+            // Update page title
+            document.title = `Livre d'Or - ${memorialData.nom} | Angels Memorial`;
+            
+            // Profile image
             const imgContainer = document.getElementById('profileImgContainer');
-            if (memorialData.photoUrl && memorialData.photoUrl.startsWith('http')) {
+            if (memorialData.photoUrl && memorialData.photoUrl.startsWith('data')) {
                 imgContainer.innerHTML = `
                     <img src="${memorialData.photoUrl}" 
                          alt="${memorialData.nom}" 
                          class="profile-img"
-                         onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\"profile-img-placeholder\"><i class=\"fas fa-angel\"></i></div>'">
+                         onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\"profile-placeholder\"><i class=\"fas fa-angel\"></i></div>'">
+                `;
+            } else if (memorialData.photoUrl && memorialData.photoUrl.startsWith('http')) {
+                imgContainer.innerHTML = `
+                    <img src="${memorialData.photoUrl}" 
+                         alt="${memorialData.nom}" 
+                         class="profile-img">
                 `;
             } else {
                 imgContainer.innerHTML = `
-                    <div class="profile-img-placeholder">
+                    <div class="profile-placeholder">
                         <i class="fas fa-angel"></i>
                     </div>
                 `;
@@ -898,52 +1545,46 @@
             let datesHTML = '';
             
             if (memorialData.dateNaissance) {
-                datesHTML += `<span><i class="fas fa-birthday-cake"></i> Né(e) le ${memorialData.dateNaissance}</span>`;
+                datesHTML += `
+                    <div class="date-item">
+                        <i class="fas fa-birthday-cake"></i>
+                        <span>Né(e) le ${formatDateDisplay(memorialData.dateNaissance)}</span>
+                    </div>
+                `;
             }
             
             if (memorialData.dateDeces) {
-                datesHTML += `<span><i class="fas fa-cross"></i> Décédé(e) le ${memorialData.dateDeces}</span>`;
+                datesHTML += `
+                    <div class="date-item">
+                        <i class="fas fa-cross"></i>
+                        <span>Décédé(e) le ${formatDateDisplay(memorialData.dateDeces)}</span>
+                    </div>
+                `;
             }
             
-            datesContainer.innerHTML = datesHTML || '<span>Mémoire éternelle</span>';
+            datesContainer.innerHTML = datesHTML || `
+                <div class="date-item">
+                    <i class="fas fa-infinity"></i>
+                    <span>Mémoire éternelle</span>
+                </div>
+            `;
             
-            // Biographie
+            // Biography
             document.getElementById('memorialBio').textContent = memorialData.biographie || 
-                'En souvenir éternel de cette personne chère à nos cœurs.';
+                'Cet espace numérique est dédié à la mémoire et au souvenir éternel.';
             
-            // Mettre à jour le titre de la page
-            document.title = `Livre d'Or - ${memorialData.nom} | Cité des Anges`;
+            // Update view count display
+            document.getElementById('viewCount').textContent = memorialData.views || 0;
             
-            // Mettre à jour le lien de partage
+            // Set share link
             const shareLink = window.location.href;
             document.getElementById('shareLink').value = shareLink;
             
-            // Configurer les écouteurs d'événements
-            setupEventListeners();
-            
-            // Démarrer l'écoute des messages en temps réel
-            startMessagesListener();
-            
-            // Mettre à jour le compteur de caractères
-            document.getElementById('message').addEventListener('input', updateCharCount);
-            document.getElementById('editContent').addEventListener('input', updateCharCount);
-            
-            updateCharCount(); // Initial count
-            
-            // Ajouter le bouton de partage
-            addShareButton();
+            // Update character counters
+            updateCharCount();
         }
 
-        // Afficher l'état d'erreur
-        function showError(title, message) {
-            document.getElementById('errorTitle').textContent = title;
-            document.getElementById('errorMessage').textContent = message;
-            document.getElementById('errorState').style.display = 'block';
-            
-            showToast(message, 'error');
-        }
-
-        // Démarrer l'écoute des messages en temps réel
+        // Start real-time messages listener
         function startMessagesListener() {
             try {
                 const messagesRef = collection(db, "deuils", currentMemorialId, "messages");
@@ -954,15 +1595,21 @@
                     
                     snapshot.forEach((docSnapshot) => {
                         const message = docSnapshot.data();
-                        messages.set(docSnapshot.id, { id: docSnapshot.id, ...message });
+                        messages.set(docSnapshot.id, { 
+                            id: docSnapshot.id, 
+                            ...message,
+                            timestamp: message.date?.toDate().getTime() || Date.now()
+                        });
                     });
                     
                     updateMessagesDisplay();
+                    updateMessageCountHeader();
+                    
                 }, (error) => {
                     console.error("Erreur écoute messages:", error);
-                    // Ne pas afficher d'erreur si la collection n'existe pas encore
+                    // Don't show error if collection doesn't exist yet
                     if (error.code !== 'failed-precondition') {
-                        showToast('Erreur de connexion avec les messages.', 'error');
+                        showToast('Erreur de connexion avec les messages', 'error');
                     }
                     updateMessagesDisplay();
                 });
@@ -972,42 +1619,53 @@
             }
         }
 
-        // Mettre à jour l'affichage des messages
+        // Update messages display
         function updateMessagesDisplay() {
             const container = document.getElementById('messagesContainer');
             const noMessages = document.getElementById('noMessages');
             const loading = document.getElementById('loadingMessages');
             
-            // Masquer le chargement
+            // Hide loading
             if (loading) loading.style.display = 'none';
             
             if (messages.size === 0) {
                 container.style.display = 'none';
                 noMessages.style.display = 'block';
-                document.getElementById('messageCount').textContent = '0';
+                document.getElementById('messagesCount').textContent = '0';
                 return;
             }
             
             container.style.display = 'flex';
             noMessages.style.display = 'none';
-            document.getElementById('messageCount').textContent = messages.size;
+            document.getElementById('messagesCount').textContent = messages.size;
             
-            // Effacer et recréer les messages
+            // Clear and recreate messages
             container.innerHTML = '';
             
-            messages.forEach((message) => {
+            // Convert to array and sort
+            let messagesArray = Array.from(messages.values());
+            
+            if (currentSort === 'oldest') {
+                messagesArray.sort((a, b) => a.timestamp - b.timestamp);
+            } else {
+                messagesArray.sort((a, b) => b.timestamp - a.timestamp);
+            }
+            
+            // Add messages with staggered animation
+            messagesArray.forEach((message, index) => {
                 const messageElement = createMessageElement(message);
+                messageElement.style.animationDelay = `${index * 0.1}s`;
                 container.appendChild(messageElement);
             });
         }
 
-        // Créer un élément de message
+        // Create message element
         function createMessageElement(message) {
             const div = document.createElement('div');
             div.className = 'message-card';
             div.dataset.id = message.id;
             
-            // Vérifier si l'utilisateur est l'auteur du message
+            // Check if user is the author
             const isOwnMessage = message.userSessionId === userSessionId;
             if (isOwnMessage) {
                 div.classList.add('own-message');
@@ -1022,15 +1680,29 @@
                     <i class="fas fa-edit"></i> Modifié le ${formatDateTime(message.edited.toDate())}
                 </div>` : '';
                 
+            // Create avatar based on author name
+            const avatarText = message.auteur ? 
+                message.auteur.charAt(0).toUpperCase() : 'A';
+                
             div.innerHTML = `
                 <div class="message-header">
                     <div class="message-author">
-                        <i class="fas fa-user-circle"></i> ${message.auteur || 'Anonyme'}
+                        <div class="author-avatar">
+                            ${avatarText}
+                        </div>
+                        <div>
+                            <strong>${message.auteur || 'Anonyme'}</strong>
+                            <div style="font-size: 0.9rem; color: var(--gray); margin-top: 5px;">
+                                <i class="fas fa-clock"></i> ${date}
+                            </div>
+                        </div>
                     </div>
-                    <div class="message-date">${date}</div>
                 </div>
-                <div class="message-content">${message.texte}</div>
+                
+                <div class="message-content">${escapeHtml(message.texte)}</div>
+                
                 ${editedInfo}
+                
                 <div class="message-actions">
                     ${isOwnMessage ? `
                         <button class="btn btn-secondary btn-small" onclick="editMessage('${message.id}')">
@@ -1050,7 +1722,46 @@
             return div;
         }
 
-        // Envoyer un message
+        // Setup event listeners
+        function setupEventListeners() {
+            // Send message
+            document.getElementById('sendBtn').addEventListener('click', sendMessage);
+            
+            // Save edit
+            document.getElementById('saveEditBtn').addEventListener('click', saveEdit);
+            
+            // Confirm delete
+            document.getElementById('confirmDelete').addEventListener('click', deleteMessage);
+            
+            // Character counters
+            document.getElementById('message').addEventListener('input', updateCharCount);
+            document.getElementById('editContent').addEventListener('input', updateEditCharCount);
+            
+            // Enter key to send (except in textarea)
+            document.getElementById('auteur').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendMessage();
+                }
+            });
+            
+            // Close modals when clicking outside
+            window.onclick = function(event) {
+                if (event.target.classList.contains('modal')) {
+                    event.target.style.display = 'none';
+                }
+            };
+            
+            // Handle Enter in edit form
+            document.getElementById('editAuthor').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    saveEdit();
+                }
+            });
+        }
+
+        // Send message
         async function sendMessage() {
             const auteur = document.getElementById('auteur').value.trim();
             const texte = document.getElementById('message').value.trim();
@@ -1071,17 +1782,30 @@
                     texte,
                     date: Timestamp.now(),
                     userSessionId: userSessionId,
-                    timestamp: Date.now()
+                    timestamp: Date.now(),
+                    ipAddress: await getClientIP()
                 };
                 
                 await addDoc(collection(db, "deuils", currentMemorialId, "messages"), messageData);
                 
-                // Réinitialiser le formulaire
+                // Clear form
                 document.getElementById('auteur').value = '';
                 document.getElementById('message').value = '';
                 updateCharCount();
                 
+                // Show success
                 showToast('Message publié avec succès.', 'success');
+                
+                // Scroll to messages
+                setTimeout(() => {
+                    document.getElementById('messagesContainer').scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'start' 
+                    });
+                }, 500);
+                
+                // Update memorial message count
+                await updateMessageCount();
                 
             } catch (error) {
                 console.error("Erreur envoi message:", error);
@@ -1089,7 +1813,25 @@
             }
         }
 
-        // Prompt de suppression
+        // Update memorial message count
+        async function updateMessageCount() {
+            try {
+                const messagesSnapshot = await getDocs(collection(db, "deuils", currentMemorialId, "messages"));
+                await updateDoc(doc(db, "deuils", currentMemorialId), {
+                    messageCount: messagesSnapshot.size,
+                    lastMessageDate: Timestamp.now()
+                });
+            } catch (error) {
+                console.error("Erreur mise à jour compteur:", error);
+            }
+        }
+
+        // Update message count header
+        function updateMessageCountHeader() {
+            document.getElementById('messageCountHeader').textContent = messages.size;
+        }
+
+        // Delete message prompt
         window.deleteMessagePrompt = function(messageId) {
             currentMessageId = messageId;
             const message = messages.get(messageId);
@@ -1102,22 +1844,26 @@
             document.getElementById('deleteModal').style.display = 'flex';
         };
 
-        // Supprimer un message
-        document.getElementById('confirmDelete').onclick = async () => {
+        // Delete message
+        async function deleteMessage() {
             if (!currentMessageId || !currentMemorialId) return;
             
             try {
                 await deleteDoc(doc(db, "deuils", currentMemorialId, "messages", currentMessageId));
+                
                 closeModal('deleteModal');
                 showToast('Message supprimé avec succès.', 'success');
+                
+                // Update memorial message count
+                await updateMessageCount();
                 
             } catch (error) {
                 console.error("Erreur suppression:", error);
                 showToast('Erreur lors de la suppression du message.', 'error');
             }
-        };
+        }
 
-        // Éditer un message
+        // Edit message
         window.editMessage = function(messageId) {
             const message = messages.get(messageId);
             if (!message || message.userSessionId !== userSessionId) {
@@ -1128,19 +1874,23 @@
             isEditing = true;
             currentMessageId = messageId;
             
-            // Basculer vers le formulaire d'édition
+            // Switch to edit form
             document.getElementById('messageForm').style.display = 'none';
             document.getElementById('editForm').style.display = 'block';
             
-            // Pré-remplir le formulaire
+            // Pre-fill form
             document.getElementById('editAuthor').value = message.auteur || '';
             document.getElementById('editContent').value = message.texte || '';
+            updateEditCharCount();
             
-            // Faire défler vers le formulaire
-            document.getElementById('editForm').scrollIntoView({ behavior: 'smooth' });
+            // Scroll to form
+            document.getElementById('editForm').scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'start' 
+            });
         };
 
-        // Annuler l'édition
+        // Cancel edit
         window.cancelEdit = function() {
             isEditing = false;
             currentMessageId = null;
@@ -1148,13 +1898,13 @@
             document.getElementById('messageForm').style.display = 'block';
             document.getElementById('editForm').style.display = 'none';
             
-            // Réinitialiser le formulaire d'édition
+            // Clear edit form
             document.getElementById('editAuthor').value = '';
             document.getElementById('editContent').value = '';
         };
 
-        // Enregistrer les modifications
-        document.getElementById('saveEditBtn').onclick = async () => {
+        // Save edit
+        async function saveEdit() {
             const newAuthor = document.getElementById('editAuthor').value.trim();
             const newContent = document.getElementById('editContent').value.trim();
             
@@ -1182,127 +1932,239 @@
                 console.error("Erreur modification:", error);
                 showToast('Erreur lors de la modification du message.', 'error');
             }
-        };
+        }
 
-        // Partager un message
-        window.shareMessage = function(messageId) {
+        // Share message
+        window.shareMessage = async function(messageId) {
             const message = messages.get(messageId);
             if (!message) return;
             
-            const text = `Message d'hommage de ${message.auteur} : "${message.texte.substring(0, 100)}..."\n\n${window.location.href}`;
+            const memorialName = document.getElementById('memorialName').textContent;
+            const text = `Message d'hommage de ${message.auteur} pour ${memorialName} : "${message.texte.substring(0, 100)}..."\n\n${window.location.href}`;
             
             if (navigator.share) {
-                navigator.share({
-                    title: `Message d'hommage - ${document.getElementById('memorialName').textContent}`,
-                    text: text,
-                    url: window.location.href
-                });
+                try {
+                    await navigator.share({
+                        title: `Message d'hommage - ${memorialName}`,
+                        text: text,
+                        url: window.location.href
+                    });
+                } catch (error) {
+                    if (error.name !== 'AbortError') {
+                        await copyToClipboard(text);
+                        showToast('Message copié dans le presse-papier !', 'success');
+                    }
+                }
             } else {
-                navigator.clipboard.writeText(text).then(() => {
-                    showToast('Message copié dans le presse-papier !', 'success');
-                });
+                await copyToClipboard(text);
+                showToast('Message copié dans le presse-papier !', 'success');
             }
         };
 
-        // Partager le livre entier
-        window.shareBook = function() {
-            document.getElementById('shareModal').style.display = 'flex';
+        // Sort messages
+        window.sortMessages = function(sortType) {
+            currentSort = sortType;
+            
+            // Update active button
+            document.querySelectorAll('.sort-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            updateMessagesDisplay();
         };
 
-        // Partager sur WhatsApp
+        // Share book
+        window.openShareModal = async function() {
+            document.getElementById('shareModal').style.display = 'flex';
+            
+            // Generate QR code if not already generated
+            const qrContainer = document.getElementById('qrCodeContainer');
+            if (qrContainer.children.length === 0) {
+                await generateQRCode();
+            }
+        };
+
+        // Generate QR code
+        async function generateQRCode() {
+            const link = window.location.href;
+            const qrContainer = document.getElementById('qrCodeContainer');
+            qrContainer.innerHTML = '';
+            
+            // Create canvas for QR code
+            const canvas = document.createElement('canvas');
+            qrContainer.appendChild(canvas);
+            
+            try {
+                // Use QRCode.js to generate QR code
+                QRCode.toCanvas(canvas, link, {
+                    width: 200,
+                    height: 200,
+                    margin: 1,
+                    color: {
+                        dark: '#0a0e17',
+                        light: '#ffffff'
+                    }
+                }, function(error) {
+                    if (error) {
+                        console.error("Erreur génération QR:", error);
+                        qrContainer.innerHTML = '<p style="color: var(--danger);">Erreur génération QR Code</p>';
+                    }
+                });
+            } catch (error) {
+                console.error("Erreur QR:", error);
+                qrContainer.innerHTML = '<p style="color: var(--danger);">Erreur génération QR Code</p>';
+            }
+        }
+
+        // Share on WhatsApp
         window.shareWhatsApp = function() {
             const link = encodeURIComponent(window.location.href);
-            const text = encodeURIComponent(`Livre d'Or numérique - ${document.getElementById('memorialName').textContent}\n\nLaissez votre message d'hommage :`);
+            const memorialName = document.getElementById('memorialName').textContent;
+            const text = encodeURIComponent(`Livre d'Or numérique - ${memorialName}\n\nLaissez votre message d'hommage pour préserver la mémoire :`);
             window.open(`https://wa.me/?text=${text}%20${link}`, '_blank');
         };
 
-        // Copier le lien
-        window.copyLink = function() {
-            const linkInput = document.getElementById('shareLink');
-            linkInput.select();
-            document.execCommand('copy');
-            
+        // Share on Facebook
+        window.shareFacebook = function() {
+            const link = encodeURIComponent(window.location.href);
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${link}`, '_blank');
+        };
+
+        // Copy link
+        window.copyLink = async function() {
+            const link = window.location.href;
+            await copyToClipboard(link);
             showToast('Lien copié dans le presse-papier !', 'success');
             closeModal('shareModal');
         };
 
-        // Fermer un modal
+        // Download QR code
+        window.downloadQRCode = function() {
+            const canvas = document.querySelector('#qrCodeContainer canvas');
+            if (!canvas) return;
+            
+            const link = document.createElement('a');
+            link.download = `QR_${document.getElementById('memorialName').textContent.replace(/\s+/g, '_')}.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+            
+            showToast('QR Code téléchargé avec succès', 'success');
+        };
+
+        // Show message tips
+        window.showMessageTips = function() {
+            document.getElementById('tipsModal').style.display = 'flex';
+        };
+
+        // Contact admin
+        window.contactAdmin = function() {
+            const email = 'contact@citedesanges.cd';
+            const subject = encodeURIComponent('Support - Livre d\'Or Angels Memorial');
+            const body = encodeURIComponent(`Bonjour,\n\nJe rencontre un problème avec le livre d'or : ${window.location.href}\n\nMerci de m'aider.`);
+            window.open(`mailto:${email}?subject=${subject}&body=${body}`, '_blank');
+        };
+
+        // Clear form
+        window.clearForm = function() {
+            if (confirm('Effacer le message en cours ?')) {
+                document.getElementById('auteur').value = '';
+                document.getElementById('message').value = '';
+                updateCharCount();
+                showToast('Formulaire effacé.', 'info');
+            }
+        };
+
+        // Scroll to form
+        window.scrollToForm = function() {
+            document.getElementById('messageForm').scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'start' 
+            });
+        };
+
+        // Close modal
         window.closeModal = function(modalId) {
             document.getElementById(modalId).style.display = 'none';
         };
 
-        // Effacer le formulaire
-        window.clearForm = function() {
-            document.getElementById('auteur').value = '';
-            document.getElementById('message').value = '';
-            updateCharCount();
-            showToast('Formulaire effacé.', 'info');
-        };
-
-        // Mettre à jour le compteur de caractères
+        // Update character count
         function updateCharCount() {
-            const textarea = isEditing ? 
-                document.getElementById('editContent') : 
-                document.getElementById('message');
+            const textarea = document.getElementById('message');
             const charCount = textarea.value.length;
-            const countElement = document.getElementById('charCount');
+            const counter = document.getElementById('charCount');
+            const counterDiv = document.getElementById('charCounter');
             
-            countElement.textContent = `${charCount}/500 caractères`;
+            counter.textContent = `${charCount}/500 caractères`;
             
             if (charCount > 500) {
-                countElement.style.color = 'var(--danger)';
+                counterDiv.classList.add('danger');
+                counterDiv.classList.remove('warning');
             } else if (charCount > 400) {
-                countElement.style.color = 'var(--warning)';
+                counterDiv.classList.add('warning');
+                counterDiv.classList.remove('danger');
             } else {
-                countElement.style.color = 'var(--gray)';
+                counterDiv.classList.remove('warning', 'danger');
             }
         }
 
-        // Configurer les écouteurs d'événements
-        function setupEventListeners() {
-            // Envoi du message
-            document.getElementById('sendBtn').addEventListener('click', sendMessage);
+        // Update edit character count
+        function updateEditCharCount() {
+            const textarea = document.getElementById('editContent');
+            const charCount = textarea.value.length;
+            const counter = document.getElementById('editCharCount');
             
-            // Envoi avec Enter (sauf dans les textarea)
-            document.getElementById('auteur').addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') sendMessage();
-            });
+            counter.textContent = `${charCount}/500 caractères`;
             
-            // Gestion des clics en dehors des modals
-            window.onclick = function(event) {
-                if (event.target.classList.contains('modal')) {
-                    event.target.style.display = 'none';
-                }
-            };
+            if (charCount > 500) {
+                counter.style.color = 'var(--danger)';
+            } else if (charCount > 400) {
+                counter.style.color = 'var(--warning)';
+            } else {
+                counter.style.color = 'var(--gray)';
+            }
         }
 
-        // Ajouter un bouton de partage
-        function addShareButton() {
-            const header = document.querySelector('.book-header');
-            const shareBtn = document.createElement('button');
-            shareBtn.className = 'btn btn-primary';
-            shareBtn.style.cssText = `
-                position: absolute;
-                top: 20px;
-                right: 20px;
-                z-index: 10;
-                padding: 10px 20px;
-                font-size: 0.9rem;
-            `;
-            shareBtn.innerHTML = '<i class="fas fa-share-alt"></i> Partager';
-            shareBtn.onclick = shareBook;
+        // Show error
+        function showError(title, message) {
+            document.getElementById('errorTitle').textContent = title;
+            document.getElementById('errorMessage').textContent = message;
+            document.getElementById('loadingState').style.display = 'none';
+            document.getElementById('errorState').style.display = 'block';
             
-            header.appendChild(shareBtn);
+            showToast(message, 'error');
         }
 
-        // Afficher une notification toast
+        // Show loading
+        function showLoading(show) {
+            document.getElementById('loadingState').style.display = show ? 'block' : 'none';
+            if (show) {
+                document.getElementById('mainContent').style.display = 'none';
+                document.getElementById('errorState').style.display = 'none';
+            }
+        }
+
+        // Show toast notification
         function showToast(message, type = 'info') {
             const container = document.getElementById('toastContainer');
+            
+            // Remove existing toast
+            const existingToast = document.querySelector('.toast');
+            if (existingToast) {
+                existingToast.style.animation = 'slideOutRight 0.3s ease';
+                setTimeout(() => existingToast.remove(), 300);
+            }
+            
+            // Create new toast
             const toast = document.createElement('div');
             toast.className = `toast toast-${type}`;
             
-            const icon = type === 'success' ? 'check-circle' :
-                        type === 'error' ? 'exclamation-circle' : 'info-circle';
+            const icon = {
+                success: 'check-circle',
+                error: 'exclamation-circle',
+                warning: 'exclamation-triangle',
+                info: 'info-circle'
+            }[type];
             
             toast.innerHTML = `
                 <i class="fas fa-${icon}"></i>
@@ -1311,36 +2173,141 @@
             
             container.appendChild(toast);
             
-            // Supprimer après 5 secondes
+            // Remove after 5 seconds
             setTimeout(() => {
-                toast.style.animation = 'slideOutRight 0.3s ease';
-                setTimeout(() => toast.remove(), 300);
+                if (toast.parentNode) {
+                    toast.style.animation = 'slideOutRight 0.3s ease';
+                    setTimeout(() => toast.remove(), 300);
+                }
             }, 5000);
         }
 
-        // Formater une date
-        function formatDate(date) {
-            if (!date) return '';
-            return new Date(date).toLocaleDateString('fr-FR', {
+        // Format date for display
+        function formatDateDisplay(dateString) {
+            if (!dateString) return '';
+            const date = new Date(dateString);
+            return date.toLocaleDateString('fr-FR', {
                 day: 'numeric',
                 month: 'long',
                 year: 'numeric'
             });
         }
 
-        // Formater une date avec l'heure
+        // Format date with time
         function formatDateTime(date) {
             if (!date) return '';
             return new Date(date).toLocaleString('fr-FR', {
                 day: 'numeric',
-                month: 'long',
+                month: 'short',
                 year: 'numeric',
                 hour: '2-digit',
                 minute: '2-digit'
             });
         }
 
-        // Gestion des erreurs
+        // Format date only
+        function formatDate(date) {
+            if (!date) return '';
+            return new Date(date).toLocaleDateString('fr-FR');
+        }
+
+        // Get client IP (approximate)
+        async function getClientIP() {
+            try {
+                const response = await fetch('https://api.ipify.org?format=json');
+                const data = await response.json();
+                return data.ip;
+            } catch (error) {
+                return 'unknown';
+            }
+        }
+
+        // Copy to clipboard
+        async function copyToClipboard(text) {
+            try {
+                await navigator.clipboard.writeText(text);
+                return true;
+            } catch (error) {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                return true;
+            }
+        }
+
+        // Escape HTML to prevent XSS
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Create floating hearts
+        function createFloatingHearts() {
+            const container = document.getElementById('floatingHearts');
+            const heartCount = 15;
+            
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '<i class="fas fa-heart"></i>';
+                
+                // Random properties
+                const size = Math.random() * 20 + 10;
+                const left = Math.random() * 100;
+                const delay = Math.random() * 15;
+                const duration = Math.random() * 10 + 15;
+                
+                heart.style.cssText = `
+                    font-size: ${size}px;
+                    left: ${left}%;
+                    animation-delay: ${delay}s;
+                    animation-duration: ${duration}s;
+                `;
+                
+                container.appendChild(heart);
+            }
+        }
+
+        // Load daily quote
+        function loadDailyQuote() {
+            const quotes = [
+                {
+                    text: "Le souvenir est le seul paradis dont nous ne pouvons être chassés.",
+                    author: "Jean Paul"
+                },
+                {
+                    text: "Ceux que nous aimons ne meurent jamais, ils vivent dans nos cœurs.",
+                    author: "Proverbe"
+                },
+                {
+                    text: "La mort n'efface pas une vie, elle la transforme en mémoire éternelle.",
+                    author: "Anonyme"
+                },
+                {
+                    text: "Le plus beau hommage que l'on puisse rendre à ceux que nous aimons, c'est de continuer à vivre pleinement.",
+                    author: "Paulo Coelho"
+                },
+                {
+                    text: "Les souvenirs sont les joyaux de notre âme, ils brillent pour l'éternité.",
+                    author: "Anonyme"
+                }
+            ];
+            
+            // Get quote based on day of month for consistency
+            const day = new Date().getDate();
+            const quoteIndex = day % quotes.length;
+            const quote = quotes[quoteIndex];
+            
+            document.getElementById('dailyQuote').textContent = `"${quote.text}"`;
+            document.querySelector('.quote-author').textContent = `— ${quote.author}`;
+        }
+
+        // Handle errors globally
         window.onerror = function(msg, url, lineNo, columnNo, error) {
             console.error('Erreur:', msg, url, lineNo, columnNo, error);
             return false;
