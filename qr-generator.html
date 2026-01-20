@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur QR Code - Angels Memorial</title>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        #qrCode {
+            margin: 30px auto;
+            border: 10px solid white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        button {
+            background: #c9a95e;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px;
+        }
+        input {
+            padding: 15px;
+            width: 80%;
+            max-width: 500px;
+            margin: 20px 0;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Générateur QR Code</h1>
+    <input type="text" id="urlInput" placeholder="Collez le lien du livre d'or ici...">
+    <br>
+    <button onclick="generateQR()">Générer QR Code</button>
+    <button onclick="downloadQR()" id="downloadBtn" style="display:none;">Télécharger</button>
+    
+    <div id="qrContainer"></div>
+    
+    <script>
+        let currentQRCode = null;
+        
+        function generateQR() {
+            const url = document.getElementById('urlInput').value.trim();
+            if (!url) {
+                alert('Veuillez entrer un lien');
+                return;
+            }
+            
+            const container = document.getElementById('qrContainer');
+            container.innerHTML = '';
+            
+            const canvas = document.createElement('canvas');
+            container.appendChild(canvas);
+            
+            QRCode.toCanvas(canvas, url, {
+                width: 300,
+                height: 300,
+                margin: 2,
+                color: {
+                    dark: '#000000',
+                    light: '#ffffff'
+                }
+            }, function(error) {
+                if (error) {
+                    alert('Erreur: ' + error.message);
+                } else {
+                    currentQRCode = canvas;
+                    document.getElementById('downloadBtn').style.display = 'inline-block';
+                }
+            });
+        }
+        
+        function downloadQR() {
+            if (!currentQRCode) return;
+            
+            const link = document.createElement('a');
+            link.download = 'QR_Code_Livre_d_Or.png';
+            link.href = currentQRCode.toDataURL('image/png');
+            link.click();
+        }
+        
+        // Auto-focus input
+        document.getElementById('urlInput').focus();
+    </script>
+</body>
+</html>
